@@ -30,13 +30,11 @@ class LocalDBService implements ILocalDBService {
   }
 
   @override
-  Future<void> saveData<E>(List<E> list) async {
+  Future<void> saveData<E>(E item) async {
     try {
       await _isar.writeTxn(() async {
         final collection = _isar.collection<E>();
-        for (final item in list) {
-          await collection.put(item);
-        }
+        await collection.put(item);
       });
     } catch (_) {
       rethrow;
@@ -44,11 +42,35 @@ class LocalDBService implements ILocalDBService {
   }
 
   @override
-  Future<void> removeData<E>() async {
+  Future<void> removeData<E>(int id) async {
+    try {
+      await _isar.writeTxn(() async {
+        final collection = _isar.collection<E>();
+        await collection.delete(id);
+      });
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> removeCollection<E>() async {
     try {
       await _isar.writeTxn(() async {
         final collection = _isar.collection<E>();
         await collection.clear();
+      });
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateData<E>(E item) async {
+    try {
+      await _isar.writeTxn(() async {
+        final collection = _isar.collection<E>();
+        await collection.put(item);
       });
     } catch (_) {
       rethrow;

@@ -10,3 +10,4 @@ linter:
     public_member_api_docs: false
     one_member_abstracts: false
     directives_ordering: false
+    avoid_positional_boolean_parameters: false

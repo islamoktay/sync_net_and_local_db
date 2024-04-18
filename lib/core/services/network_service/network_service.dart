@@ -20,18 +20,23 @@ class NetworkService implements INetworkService {
         case RequestMethods.get:
           response = await _dio.get(url);
         case RequestMethods.post:
-          response = await _dio.post(url);
-        case RequestMethods.put:
-          response = await _dio.put(url);
+          response = await _dio.post(
+            url,
+            data: body,
+          );
+        case RequestMethods.patch:
+          response = await _dio.patch(
+            url,
+            data: body,
+          );
+        case RequestMethods.delete:
+          response = await _dio.delete(url);
       }
 
       switch (response.statusCode) {
         case 200:
-        case 201:
-        case 204:
           return response.data;
         default:
-          throw Exception('Failed to load data');
       }
     } catch (_) {
       rethrow;
