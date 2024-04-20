@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:sync_net_and_local_db/feature/home/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_flow_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_from_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/watch_users_usecase.dart';

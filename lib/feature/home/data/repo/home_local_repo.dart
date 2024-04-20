@@ -1,23 +1,14 @@
-import 'package:collection/collection.dart';
 
+import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
-import 'package:sync_net_and_local_db/feature/home/data/model/local/user_local_model.dart';
-import 'package:sync_net_and_local_db/feature/home/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/core/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
 
 class HomeLocalRepo implements IHomeLocalRepo {
   HomeLocalRepo(this._localDBService);
 
   final ILocalDBService _localDBService;
-  @override
-  Future<void> createUser(User user) async {
-    try {
-      await _localDBService
-          .saveData<UserLocalModel>(UserLocalModel().fromEntity(user));
-    } catch (_) {
-      rethrow;
-    }
-  }
+
 
   @override
   Future<List<User>> getUsers() async {
@@ -29,18 +20,7 @@ class HomeLocalRepo implements IHomeLocalRepo {
     }
   }
 
-  @override
-  Future<void> removeUser(String id) async {
-    try {
-      final result = await _localDBService.getData<UserLocalModel>();
-      final item = result.firstWhereOrNull((e) => e.id == int.tryParse(id));
-      if (item != null && item.id != null) {
-        await _localDBService.removeData<UserLocalModel>(item.id!);
-      }
-    } catch (_) {
-      rethrow;
-    }
-  }
+
 
   @override
   Future<void> updateUser(User user) async {

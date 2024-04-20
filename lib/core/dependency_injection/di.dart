@@ -5,6 +5,8 @@ import 'package:isar/isar.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'package:sync_net_and_local_db/core/common/data/repo/common_repo.dart';
+import 'package:sync_net_and_local_db/core/common/domain/repo/i_common_repo.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/local_db_service.dart';
 import 'package:sync_net_and_local_db/core/services/navigation_service/i_navigation_service.dart';
@@ -13,7 +15,9 @@ import 'package:sync_net_and_local_db/core/services/network_service/i_network_se
 import 'package:sync_net_and_local_db/core/services/network_service/network_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/i_network_status_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/network_status_service.dart';
-import 'package:sync_net_and_local_db/feature/home/data/model/local/user_local_model.dart';
+import 'package:sync_net_and_local_db/feature/create_user/data/repo/create_user_repo.dart';
+import 'package:sync_net_and_local_db/feature/create_user/domain/repo/i_create_user_repo.dart';
+import 'package:sync_net_and_local_db/core/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/home/data/repo/home_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/data/repo/home_remote_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
@@ -41,7 +45,9 @@ Future<void> setupLocator() async {
 
     // repos
     ..registerLazySingleton<IHomeLocalRepo>(() => HomeLocalRepo(sl()))
-    ..registerLazySingleton<IHomeRemoteRepo>(() => HomeRemoteRepo(sl()));
+    ..registerLazySingleton<IHomeRemoteRepo>(() => HomeRemoteRepo(sl()))
+    ..registerLazySingleton<ICreateUserRepo>(() => CreateUserRepo(sl()))
+    ..registerLazySingleton<ICommonRepo>(() => CommonRepo(sl()));
 
   // usecases
 
