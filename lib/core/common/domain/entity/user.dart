@@ -1,4 +1,4 @@
-import 'package:sync_net_and_local_db/feature/create_user/constants/form_constants.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/constants/form_constants.dart';
 
 class User {
   const User({

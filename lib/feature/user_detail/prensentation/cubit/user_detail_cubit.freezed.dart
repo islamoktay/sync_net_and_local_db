@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'create_user_cubit.dart';
+part of 'user_detail_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$CreateUserState {
+mixin _$UserDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -69,16 +69,16 @@ mixin _$CreateUserState {
 }
 
 /// @nodoc
-abstract class $CreateUserStateCopyWith<$Res> {
-  factory $CreateUserStateCopyWith(
-          CreateUserState value, $Res Function(CreateUserState) then) =
-      _$CreateUserStateCopyWithImpl<$Res, CreateUserState>;
+abstract class $UserDetailStateCopyWith<$Res> {
+  factory $UserDetailStateCopyWith(
+          UserDetailState value, $Res Function(UserDetailState) then) =
+      _$UserDetailStateCopyWithImpl<$Res, UserDetailState>;
 }
 
 /// @nodoc
-class _$CreateUserStateCopyWithImpl<$Res, $Val extends CreateUserState>
-    implements $CreateUserStateCopyWith<$Res> {
-  _$CreateUserStateCopyWithImpl(this._value, this._then);
+class _$UserDetailStateCopyWithImpl<$Res, $Val extends UserDetailState>
+    implements $UserDetailStateCopyWith<$Res> {
+  _$UserDetailStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +95,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CreateUserStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -109,7 +109,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CreateUserState.initial()';
+    return 'UserDetailState.initial()';
   }
 
   @override
@@ -196,7 +196,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements CreateUserState {
+abstract class _Initial implements UserDetailState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -209,7 +209,7 @@ abstract class _$$loadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$loadingImplCopyWithImpl<$Res>
-    extends _$CreateUserStateCopyWithImpl<$Res, _$loadingImpl>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$loadingImpl>
     implements _$$loadingImplCopyWith<$Res> {
   __$$loadingImplCopyWithImpl(
       _$loadingImpl _value, $Res Function(_$loadingImpl) _then)
@@ -223,7 +223,7 @@ class _$loadingImpl implements _loading {
 
   @override
   String toString() {
-    return 'CreateUserState.loading()';
+    return 'UserDetailState.loading()';
   }
 
   @override
@@ -310,7 +310,7 @@ class _$loadingImpl implements _loading {
   }
 }
 
-abstract class _loading implements CreateUserState {
+abstract class _loading implements UserDetailState {
   const factory _loading() = _$loadingImpl;
 }
 
@@ -323,7 +323,7 @@ abstract class _$$successImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$successImplCopyWithImpl<$Res>
-    extends _$CreateUserStateCopyWithImpl<$Res, _$successImpl>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$successImpl>
     implements _$$successImplCopyWith<$Res> {
   __$$successImplCopyWithImpl(
       _$successImpl _value, $Res Function(_$successImpl) _then)
@@ -337,7 +337,7 @@ class _$successImpl implements _success {
 
   @override
   String toString() {
-    return 'CreateUserState.success()';
+    return 'UserDetailState.success()';
   }
 
   @override
@@ -424,7 +424,7 @@ class _$successImpl implements _success {
   }
 }
 
-abstract class _success implements CreateUserState {
+abstract class _success implements UserDetailState {
   const factory _success() = _$successImpl;
 }
 
@@ -437,7 +437,7 @@ abstract class _$$errorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$errorImplCopyWithImpl<$Res>
-    extends _$CreateUserStateCopyWithImpl<$Res, _$errorImpl>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$errorImpl>
     implements _$$errorImplCopyWith<$Res> {
   __$$errorImplCopyWithImpl(
       _$errorImpl _value, $Res Function(_$errorImpl) _then)
@@ -451,7 +451,7 @@ class _$errorImpl implements _error {
 
   @override
   String toString() {
-    return 'CreateUserState.error()';
+    return 'UserDetailState.error()';
   }
 
   @override
@@ -538,6 +538,6 @@ class _$errorImpl implements _error {
   }
 }
 
-abstract class _error implements CreateUserState {
+abstract class _error implements UserDetailState {
   const factory _error() = _$errorImpl;
 }

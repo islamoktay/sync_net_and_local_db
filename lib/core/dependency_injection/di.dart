@@ -15,8 +15,8 @@ import 'package:sync_net_and_local_db/core/services/network_service/i_network_se
 import 'package:sync_net_and_local_db/core/services/network_service/network_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/i_network_status_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/network_status_service.dart';
-import 'package:sync_net_and_local_db/feature/create_user/data/repo/create_user_repo.dart';
-import 'package:sync_net_and_local_db/feature/create_user/domain/repo/i_create_user_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/data/repo/user_detail_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_repo.dart';
 import 'package:sync_net_and_local_db/core/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/home/data/repo/home_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/data/repo/home_remote_repo.dart';
@@ -46,7 +46,7 @@ Future<void> setupLocator() async {
     // repos
     ..registerLazySingleton<IHomeLocalRepo>(() => HomeLocalRepo(sl()))
     ..registerLazySingleton<IHomeRemoteRepo>(() => HomeRemoteRepo(sl()))
-    ..registerLazySingleton<ICreateUserRepo>(() => CreateUserRepo(sl()))
+    ..registerLazySingleton<IUserDetailRepo>(() => UserDetailRepo(sl()))
     ..registerLazySingleton<ICommonRepo>(() => CommonRepo(sl()));
 
   // usecases

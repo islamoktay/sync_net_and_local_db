@@ -5,15 +5,18 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
-import 'package:sync_net_and_local_db/core/helper/show_snack_bar.dart';
-import 'package:sync_net_and_local_db/feature/create_user/constants/form_constants.dart';
-import 'package:sync_net_and_local_db/feature/create_user/prensentation/cubit/create_user_cubit.dart';
-import 'package:sync_net_and_local_db/feature/home/presentation/provider/cubit/user_cubit.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/constants/form_constants.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/prensentation/cubit/user_detail_cubit.dart';
 
-class CreateUserBody extends StatelessWidget {
-  CreateUserBody({super.key, this.user});
+class UserDetailInitialBody extends StatelessWidget {
+  UserDetailInitialBody({
+    required this.user,
+    super.key,
+  });
   final _formKey = GlobalKey<FormBuilderState>();
+
   final User? user;
+
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
@@ -48,32 +51,13 @@ class CreateUserBody extends StatelessWidget {
               ]),
             ),
             const SizedBox(height: 32),
-            BlocConsumer<CreateUserCubit, CreateUserState>(
-              listener: (context, state) {
-                state.maybeMap(
-                  success: (value) {
-                    Navigator.pop(context);
-                    customSnackBar(
-                      content: 'User created successfully',
-                      color: Colors.green,
-                      context: context,
-                    );
-                  },
-                  error: (value) {
-                    customSnackBar(
-                      content: 'Sth went wrong while creating user.',
-                      context: context,
-                    );
-                  },
-                  orElse: () {},
-                );
-              },
+            BlocBuilder<UserDetailCubit, UserDetailState>(
               builder: (context, state) {
                 return MaterialButton(
                   color: Theme.of(context).colorScheme.secondary,
                   onPressed: () {
                     if (_formKey.currentState?.saveAndValidate() ?? false) {
-                      context.read<CreateUserCubit>().createUser(
+                      context.read<UserDetailCubit>().createUser(
                             User.fromMap(_formKey.currentState!.value, user),
                           );
                     }

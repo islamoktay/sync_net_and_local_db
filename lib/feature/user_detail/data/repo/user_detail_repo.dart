@@ -1,12 +1,12 @@
+import 'package:sync_net_and_local_db/core/common/data/model/remote/user_model.dart';
 import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/enums/request_methods.dart';
 import 'package:sync_net_and_local_db/core/services/network_service/i_network_service.dart';
-import 'package:sync_net_and_local_db/feature/create_user/domain/repo/i_create_user_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/core/constant/home_network_constants.dart';
-import 'package:sync_net_and_local_db/core/common/data/model/remote/user_model.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_repo.dart';
 
-class CreateUserRepo implements ICreateUserRepo {
-  const CreateUserRepo(this._networkService);
+class UserDetailRepo implements IUserDetailRepo {
+  const UserDetailRepo(this._networkService);
 
   final INetworkService _networkService;
 
