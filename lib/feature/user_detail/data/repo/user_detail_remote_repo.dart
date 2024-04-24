@@ -1,8 +1,9 @@
-import 'package:sync_net_and_local_db/feature/common/data/model/remote/user_model.dart';
-import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/enums/request_methods.dart';
 import 'package:sync_net_and_local_db/core/services/network_service/i_network_service.dart';
+import 'package:sync_net_and_local_db/feature/common/data/model/remote/user_model.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/home/core/constant/home_network_constants.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/data/model/create_user_response_model.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_remote_repo.dart';
 
 class UserDetailRemoteRepo implements IUserDetailRemoteRepo {
@@ -11,13 +12,21 @@ class UserDetailRemoteRepo implements IUserDetailRemoteRepo {
   final INetworkService _networkService;
 
   @override
-  Future<void> createUser(User user) async {
+  Future<String> createUser(User user) async {
     try {
-      await _networkService.networkRequest(
+      final response = await _networkService.networkRequest(
         HomeNetworkConstants.usersJson,
         method: RequestMethods.post,
         body: UserModel.fromEntity(user).toJson(),
       );
+      final id = CreateUserResponseModel.fromJson(
+        response as Map<String, dynamic>,
+      ).name;
+      if (id?.isNotEmpty ?? false) {
+        return id!;
+      } else {
+        throw Exception('id is null');
+      }
     } catch (_) {
       rethrow;
     }

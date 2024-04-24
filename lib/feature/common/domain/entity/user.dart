@@ -1,7 +1,7 @@
 import 'package:sync_net_and_local_db/feature/user_detail/constants/form_constants.dart';
 
 class User {
-  const User({
+  User({
     required this.id,
     required this.updatedTime,
     required this.name,
@@ -19,7 +19,7 @@ class User {
         phone = data[FormConstants.phone].toString();
 
   final int? localId;
-  final String? id;
+  String? id;
   final String name;
   final String mail;
   final String phone;

@@ -5,6 +5,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/services/navigation_service/i_navigation_service.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_local_repo.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_remote_repo.dart';
+import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_remote_usecase.dart';
+import 'package:sync_net_and_local_db/feature/home/presentation/provider/cubit/remove_user_cubit.dart';
 import 'package:sync_net_and_local_db/feature/home/presentation/provider/cubit/user_cubit.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/prensentation/view/user_detail_view.dart';
 
@@ -24,8 +29,25 @@ class UsersListBody extends StatelessWidget {
             return Slidable(
               endActionPane: ActionPane(
                 motion: const ScrollMotion(),
-                extentRatio: .25,
                 children: [
+                  BlocProvider(
+                    create: (context) => RemoveUserCubit(
+                      RemoveUserFromLocalUsecase(sl<ICommonLocalRepo>()),
+                      RemoveUserFromRemoteUsecase(sl<ICommonRemoteRepo>()),
+                    ),
+                    child: BlocBuilder<RemoveUserCubit, RemoveUserState>(
+                      builder: (context, state) {
+                        return SlidableAction(
+                          onPressed: (context) =>
+                              context.read<RemoveUserCubit>().removeUser(user),
+                          backgroundColor: Colors.redAccent,
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'Remove',
+                        );
+                      },
+                    ),
+                  ),
                   SlidableAction(
                     onPressed: (context) => sl<INavigationService>().push(
                       context,

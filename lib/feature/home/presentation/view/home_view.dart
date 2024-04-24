@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_repo.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/common/usecase/save_users_to_local_usecase.dart';
 import 'package:sync_net_and_local_db/core/constant/app_constants.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
@@ -31,7 +31,7 @@ class HomeView extends StatelessWidget {
           sl<INetworkStatusService>(),
           GetUsersFromNetworkUsecase(sl<IHomeRemoteRepo>()),
           RemoveUsersFromLocalDBUsecase(sl<IHomeLocalRepo>()),
-          SaveUsersToLocalUsecase(sl<ICommonRepo>()),
+          SaveUsersToLocalUsecase(sl<ICommonLocalRepo>()),
           GetUsersFromLocalUsecase(sl<IHomeLocalRepo>()),
         ),
       )..getUsersFlow(),
