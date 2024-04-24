@@ -22,6 +22,8 @@ mixin _$UserDetailState {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$UserDetailState {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$UserDetailState {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +53,8 @@ mixin _$UserDetailState {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +63,8 @@ mixin _$UserDetailState {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +73,8 @@ mixin _$UserDetailState {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +140,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
   }) {
     return initial();
   }
@@ -139,6 +153,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
   }) {
     return initial?.call();
   }
@@ -150,6 +166,8 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,6 +183,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
   }) {
     return initial(this);
   }
@@ -176,6 +196,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
   }) {
     return initial?.call(this);
   }
@@ -187,6 +209,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -242,6 +266,8 @@ class _$loadingImpl implements _loading {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
   }) {
     return loading();
   }
@@ -253,6 +279,8 @@ class _$loadingImpl implements _loading {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
   }) {
     return loading?.call();
   }
@@ -264,6 +292,8 @@ class _$loadingImpl implements _loading {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -279,6 +309,8 @@ class _$loadingImpl implements _loading {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
   }) {
     return loading(this);
   }
@@ -290,6 +322,8 @@ class _$loadingImpl implements _loading {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
   }) {
     return loading?.call(this);
   }
@@ -301,6 +335,8 @@ class _$loadingImpl implements _loading {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -356,6 +392,8 @@ class _$successImpl implements _success {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
   }) {
     return success();
   }
@@ -367,6 +405,8 @@ class _$successImpl implements _success {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
   }) {
     return success?.call();
   }
@@ -378,6 +418,8 @@ class _$successImpl implements _success {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -393,6 +435,8 @@ class _$successImpl implements _success {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
   }) {
     return success(this);
   }
@@ -404,6 +448,8 @@ class _$successImpl implements _success {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
   }) {
     return success?.call(this);
   }
@@ -415,6 +461,8 @@ class _$successImpl implements _success {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -470,6 +518,8 @@ class _$errorImpl implements _error {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
   }) {
     return error();
   }
@@ -481,6 +531,8 @@ class _$errorImpl implements _error {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
   }) {
     return error?.call();
   }
@@ -492,6 +544,8 @@ class _$errorImpl implements _error {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -507,6 +561,8 @@ class _$errorImpl implements _error {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
   }) {
     return error(this);
   }
@@ -518,6 +574,8 @@ class _$errorImpl implements _error {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
   }) {
     return error?.call(this);
   }
@@ -529,6 +587,8 @@ class _$errorImpl implements _error {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -540,4 +600,256 @@ class _$errorImpl implements _error {
 
 abstract class _error implements UserDetailState {
   const factory _error() = _$errorImpl;
+}
+
+/// @nodoc
+abstract class _$$userRemovedImplCopyWith<$Res> {
+  factory _$$userRemovedImplCopyWith(
+          _$userRemovedImpl value, $Res Function(_$userRemovedImpl) then) =
+      __$$userRemovedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$userRemovedImplCopyWithImpl<$Res>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$userRemovedImpl>
+    implements _$$userRemovedImplCopyWith<$Res> {
+  __$$userRemovedImplCopyWithImpl(
+      _$userRemovedImpl _value, $Res Function(_$userRemovedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$userRemovedImpl implements _userRemoved {
+  const _$userRemovedImpl();
+
+  @override
+  String toString() {
+    return 'UserDetailState.userRemoved()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$userRemovedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
+  }) {
+    return userRemoved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
+  }) {
+    return userRemoved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
+    required TResult orElse(),
+  }) {
+    if (userRemoved != null) {
+      return userRemoved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_loading value) loading,
+    required TResult Function(_success value) success,
+    required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
+  }) {
+    return userRemoved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_loading value)? loading,
+    TResult? Function(_success value)? success,
+    TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
+  }) {
+    return userRemoved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_loading value)? loading,
+    TResult Function(_success value)? success,
+    TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
+    required TResult orElse(),
+  }) {
+    if (userRemoved != null) {
+      return userRemoved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _userRemoved implements UserDetailState {
+  const factory _userRemoved() = _$userRemovedImpl;
+}
+
+/// @nodoc
+abstract class _$$userUpdatedImplCopyWith<$Res> {
+  factory _$$userUpdatedImplCopyWith(
+          _$userUpdatedImpl value, $Res Function(_$userUpdatedImpl) then) =
+      __$$userUpdatedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$userUpdatedImplCopyWithImpl<$Res>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$userUpdatedImpl>
+    implements _$$userUpdatedImplCopyWith<$Res> {
+  __$$userUpdatedImplCopyWithImpl(
+      _$userUpdatedImpl _value, $Res Function(_$userUpdatedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$userUpdatedImpl implements _userUpdated {
+  const _$userUpdatedImpl();
+
+  @override
+  String toString() {
+    return 'UserDetailState.userUpdated()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$userUpdatedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
+  }) {
+    return userUpdated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
+  }) {
+    return userUpdated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
+    required TResult orElse(),
+  }) {
+    if (userUpdated != null) {
+      return userUpdated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_loading value) loading,
+    required TResult Function(_success value) success,
+    required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
+  }) {
+    return userUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_loading value)? loading,
+    TResult? Function(_success value)? success,
+    TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
+  }) {
+    return userUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_loading value)? loading,
+    TResult Function(_success value)? success,
+    TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
+    required TResult orElse(),
+  }) {
+    if (userUpdated != null) {
+      return userUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _userUpdated implements UserDetailState {
+  const factory _userUpdated() = _$userUpdatedImpl;
 }

@@ -12,7 +12,7 @@ import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_remote_rep
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_flow_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_from_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_from_network_usecase.dart';
-import 'package:sync_net_and_local_db/core/common/usecase/remove_users_from_local_db_usecase.dart';
+import 'package:sync_net_and_local_db/feature/home/domain/usecase/remove_users_from_local_db_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/watch_users_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/presentation/provider/cubit/user_cubit.dart';
 import 'package:sync_net_and_local_db/feature/home/presentation/widgets/add_user_button.dart';

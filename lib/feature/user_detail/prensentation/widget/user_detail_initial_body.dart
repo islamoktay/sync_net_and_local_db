@@ -53,20 +53,37 @@ class UserDetailInitialBody extends StatelessWidget {
             const SizedBox(height: 32),
             BlocBuilder<UserDetailCubit, UserDetailState>(
               builder: (context, state) {
-                return MaterialButton(
-                  color: Theme.of(context).colorScheme.secondary,
-                  onPressed: () {
-                    if (_formKey.currentState?.saveAndValidate() ?? false) {
-                      context.read<UserDetailCubit>().createUser(
-                            User.fromMap(_formKey.currentState!.value, user),
-                          );
-                    }
-                  },
-                  child: const Text(
-                    'Create',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
+                if (user == null) {
+                  return MaterialButton(
+                    color: Theme.of(context).colorScheme.secondary,
+                    onPressed: () {
+                      if (_formKey.currentState?.saveAndValidate() ?? false) {
+                        context.read<UserDetailCubit>().createUser(
+                              User.fromMap(_formKey.currentState!.value, user),
+                            );
+                      }
+                    },
+                    child: const Text(
+                      'Create',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                } else {
+                  return MaterialButton(
+                    color: Theme.of(context).colorScheme.secondary,
+                    onPressed: () {
+                      if (_formKey.currentState?.saveAndValidate() ?? false) {
+                        context.read<UserDetailCubit>().updateUser(
+                              User.fromMap(_formKey.currentState!.value, user),
+                            );
+                      }
+                    },
+                    child: const Text(
+                      'Update',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                }
               },
             ),
           ],

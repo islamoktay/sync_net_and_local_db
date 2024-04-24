@@ -1,10 +1,10 @@
-import 'package:sync_net_and_local_db/core/common/usecase/i_usecase.dart';
 import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
-import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
+import 'package:sync_net_and_local_db/core/common/usecase/i_usecase.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_local_repo.dart';
 
 class UpdateUserInLocalUsecase implements Usecase<void, User> {
   const UpdateUserInLocalUsecase(this._repo);
-  final IHomeLocalRepo _repo;
+  final IUserDetailLocalRepo _repo;
 
   @override
   Future<void> call(User user) async {

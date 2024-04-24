@@ -5,6 +5,7 @@ import 'package:isar/isar.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'package:sync_net_and_local_db/core/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/core/common/data/repo/common_repo.dart';
 import 'package:sync_net_and_local_db/core/common/domain/repo/i_common_repo.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
@@ -15,13 +16,14 @@ import 'package:sync_net_and_local_db/core/services/network_service/i_network_se
 import 'package:sync_net_and_local_db/core/services/network_service/network_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/i_network_status_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/network_status_service.dart';
-import 'package:sync_net_and_local_db/feature/user_detail/data/repo/user_detail_repo.dart';
-import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_repo.dart';
-import 'package:sync_net_and_local_db/core/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/home/data/repo/home_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/data/repo/home_remote_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_remote_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/data/repo/user_detail_local_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/data/repo/user_detail_remote_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_local_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_remote_repo.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -46,7 +48,12 @@ Future<void> setupLocator() async {
     // repos
     ..registerLazySingleton<IHomeLocalRepo>(() => HomeLocalRepo(sl()))
     ..registerLazySingleton<IHomeRemoteRepo>(() => HomeRemoteRepo(sl()))
-    ..registerLazySingleton<IUserDetailRepo>(() => UserDetailRepo(sl()))
+    ..registerLazySingleton<IUserDetailRemoteRepo>(
+      () => UserDetailRemoteRepo(sl()),
+    )
+    ..registerLazySingleton<IUserDetailLocalRepo>(
+      () => UserDetailLocalRepo(sl()),
+    )
     ..registerLazySingleton<ICommonRepo>(() => CommonRepo(sl()));
 
   // usecases

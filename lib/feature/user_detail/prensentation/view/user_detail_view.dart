@@ -7,8 +7,12 @@ import 'package:sync_net_and_local_db/core/common/domain/repo/i_common_repo.dart
 import 'package:sync_net_and_local_db/core/common/usecase/save_users_to_local_usecase.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/data/usecase/create_user_usecase.dart';
-import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/data/usecase/update_user_in_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/data/usecase/update_user_in_remote_usecase.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_local_repo.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_remote_repo.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/prensentation/cubit/user_detail_cubit.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/prensentation/widget/user_detail_appbar.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/prensentation/widget/user_detail_body.dart';
 
 class UserDetailView extends StatelessWidget {
@@ -17,16 +21,16 @@ class UserDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create User'),
+    return BlocProvider(
+      create: (context) => UserDetailCubit(
+        CreateUserUsecase(sl<IUserDetailRemoteRepo>()),
+        SaveUsersToLocalUsecase(sl<ICommonRepo>()),
+        UpdateUserInRemoteUsecase(sl<IUserDetailRemoteRepo>()),
+        UpdateUserInLocalUsecase(sl<IUserDetailLocalRepo>()),
       ),
-      body: BlocProvider(
-        create: (context) => UserDetailCubit(
-          CreateUserUsecase(sl<IUserDetailRepo>()),
-          SaveUsersToLocalUsecase(sl<ICommonRepo>()),
-        ),
-        child: UserDetailBody(user: user),
+      child: Scaffold(
+        appBar: UserDetailAppbar(user: user),
+        body: UserDetailBody(user: user),
       ),
     );
   }
