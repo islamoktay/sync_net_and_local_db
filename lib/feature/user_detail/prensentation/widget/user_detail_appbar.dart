@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 
 class UserDetailAppbar extends StatelessWidget implements PreferredSizeWidget {
   const UserDetailAppbar({

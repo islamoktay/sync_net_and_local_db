@@ -1,7 +1,7 @@
 
-import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
-import 'package:sync_net_and_local_db/core/common/data/model/local/user_local_model.dart';
+import 'package:sync_net_and_local_db/feature/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
 
 class HomeLocalRepo implements IHomeLocalRepo {

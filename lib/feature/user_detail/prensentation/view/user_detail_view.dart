@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
-import 'package:sync_net_and_local_db/core/common/domain/repo/i_common_repo.dart';
-import 'package:sync_net_and_local_db/core/common/usecase/save_users_to_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_repo.dart';
+import 'package:sync_net_and_local_db/feature/common/usecase/save_users_to_local_usecase.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
-import 'package:sync_net_and_local_db/feature/user_detail/data/usecase/create_user_usecase.dart';
-import 'package:sync_net_and_local_db/feature/user_detail/data/usecase/update_user_in_local_usecase.dart';
-import 'package:sync_net_and_local_db/feature/user_detail/data/usecase/update_user_in_remote_usecase.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/usecase/create_user_usecase.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/usecase/update_user_in_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/user_detail/domain/usecase/update_user_in_remote_usecase.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/domain/repo/i_user_detail_remote_repo.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/prensentation/cubit/user_detail_cubit.dart';

@@ -1,4 +1,4 @@
-import 'package:sync_net_and_local_db/core/common/usecase/i_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/usecase/i_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
 
 class RemoveUsersFromLocalDBUsecase implements Usecase<void, NoParams?> {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/helper/show_snack_bar.dart';
 import 'package:sync_net_and_local_db/core/services/navigation_service/i_navigation_service.dart';

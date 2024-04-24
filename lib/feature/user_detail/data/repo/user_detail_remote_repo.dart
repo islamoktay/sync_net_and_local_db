@@ -1,5 +1,5 @@
-import 'package:sync_net_and_local_db/core/common/data/model/remote/user_model.dart';
-import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/feature/common/data/model/remote/user_model.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/enums/request_methods.dart';
 import 'package:sync_net_and_local_db/core/services/network_service/i_network_service.dart';
 import 'package:sync_net_and_local_db/feature/home/core/constant/home_network_constants.dart';

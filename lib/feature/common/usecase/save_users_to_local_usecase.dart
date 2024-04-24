@@ -1,6 +1,6 @@
-import 'package:sync_net_and_local_db/core/common/domain/entity/user.dart';
-import 'package:sync_net_and_local_db/core/common/domain/repo/i_common_repo.dart';
-import 'package:sync_net_and_local_db/core/common/usecase/i_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_repo.dart';
+import 'package:sync_net_and_local_db/feature/common/usecase/i_usecase.dart';
 
 class SaveUsersToLocalUsecase implements Usecase<void, List<User>> {
   const SaveUsersToLocalUsecase(this._repo);
