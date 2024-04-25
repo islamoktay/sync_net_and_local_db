@@ -32,9 +32,16 @@ class UserDetailCubit extends Cubit<UserDetailState> {
   Future<void> createUser(User user) async {
     try {
       emit(const UserDetailState.loading());
+
       final id = await _createUserUsecase(user);
-      user.id = id;
-      await _saveUsersToLocalUsecase([user]);
+      
+      if (id?.isNotEmpty ?? false) {
+        user.id = id;
+        await _saveUsersToLocalUsecase([user]);
+      } else {
+        emit(const UserDetailState.error());
+      }
+      
       emit(const UserDetailState.success());
     } catch (_) {
       emit(const UserDetailState.error());
@@ -46,8 +53,10 @@ class UserDetailCubit extends Cubit<UserDetailState> {
   Future<void> updateUser(User user) async {
     try {
       emit(const UserDetailState.loading());
+
       await _updateUserInRemoteUsecase(user);
       await _updateUserInLocalUsecase(user);
+
       emit(const UserDetailState.userUpdated());
     } catch (_) {
       emit(const UserDetailState.error());
@@ -62,6 +71,7 @@ class UserDetailCubit extends Cubit<UserDetailState> {
 
       await _removeUserFromRemoteUsecase(user);
       await _removeUserFromLocalUsecase(user);
+
       emit(const UserDetailState.userRemoved());
     } catch (_) {
       emit(const UserDetailState.error());

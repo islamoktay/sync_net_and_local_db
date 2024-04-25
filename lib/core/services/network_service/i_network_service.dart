@@ -5,5 +5,6 @@ abstract class INetworkService {
     String url, {
     required RequestMethods method,
     Map<String, dynamic>? body,
+    bool isOfflineSave = false,
   });
 }

@@ -1,14 +1,12 @@
-
-import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
 import 'package:sync_net_and_local_db/feature/common/data/model/local/user_local_model.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
 
 class HomeLocalRepo implements IHomeLocalRepo {
   HomeLocalRepo(this._localDBService);
 
   final ILocalDBService _localDBService;
-
 
   @override
   Future<List<User>> getUsers() async {
@@ -20,20 +18,8 @@ class HomeLocalRepo implements IHomeLocalRepo {
     }
   }
 
-
-
   @override
-  Future<void> updateUser(User user) async {
-    try {
-      final item = UserLocalModel().fromEntity(user);
-      await _localDBService.updateData(item);
-    } catch (_) {
-      rethrow;
-    }
-  }
-
-  @override
-  void initWatcher(void Function(List<User> p1) callback) {
+  void initWatcher(void Function(List<User> val) callback) {
     try {
       _localDBService.initWatcher<UserLocalModel>(
         (List<UserLocalModel> data) {

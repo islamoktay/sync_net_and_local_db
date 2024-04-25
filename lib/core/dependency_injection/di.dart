@@ -13,6 +13,10 @@ import 'package:sync_net_and_local_db/core/services/network_service/i_network_se
 import 'package:sync_net_and_local_db/core/services/network_service/network_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/i_network_status_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/network_status_service.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/data/model/local/offline_request_local_model.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/data/repo/offline_request_service.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/repo/i_offline_request_service.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_save_request_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/common/data/repo/common_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/common/data/repo/common_remote_repo.dart';
@@ -43,23 +47,30 @@ Future<void> setupLocator() async {
     ..registerLazySingleton<INetworkStatusService>(
       () => NetworkStatusService(sl()),
     )
+    ..registerLazySingleton<IOfflineRequestService>(
+      () => OfflineRequestService(sl(), sl()),
+    )
     ..registerLazySingleton<Logger>(
       () => Logger(printer: PrettyPrinter(methodCount: 0)),
     )
+    // usecases
+    ..registerLazySingleton<OfflineSaveRequestUsecase>(
+      () => OfflineSaveRequestUsecase(sl()),
+    )
 
     // repos
+    ..registerLazySingleton<IHomeLocalRepo>(() => HomeLocalRepo(sl()))
+    ..registerLazySingleton<IHomeRemoteRepo>(() => HomeRemoteRepo(sl()))
+    ..registerLazySingleton<ICommonLocalRepo>(() => CommonLocalRepo(sl()))
     ..registerLazySingleton<IUserDetailRemoteRepo>(
-      () => UserDetailRemoteRepo(sl()),
+      () => UserDetailRemoteRepo(sl(), sl()),
     )
     ..registerLazySingleton<IUserDetailLocalRepo>(
       () => UserDetailLocalRepo(sl()),
     )
-    ..registerLazySingleton<IHomeLocalRepo>(() => HomeLocalRepo(sl()))
-    ..registerLazySingleton<IHomeRemoteRepo>(() => HomeRemoteRepo(sl()))
-    ..registerLazySingleton<ICommonLocalRepo>(() => CommonLocalRepo(sl()))
-    ..registerLazySingleton<ICommonRemoteRepo>(() => CommonRemoteRepo(sl()));
-
-  // usecases
+    ..registerLazySingleton<ICommonRemoteRepo>(
+      () => CommonRemoteRepo(sl(), sl()),
+    );
 
   // blocs
 }
@@ -67,7 +78,10 @@ Future<void> setupLocator() async {
 Future<Isar> _isarInit() async {
   final dir = await getApplicationDocumentsDirectory();
   final isar = await Isar.open(
-    [UserLocalModelSchema],
+    [
+      UserLocalModelSchema,
+      OfflineRequestLocalModelSchema,
+    ],
     directory: dir.path,
   );
   return isar;
