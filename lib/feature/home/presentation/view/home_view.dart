@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_local_repo.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/save_users_to_local_usecase.dart';
-import 'package:sync_net_and_local_db/core/constant/app_constants.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/i_network_status_service.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_local_repo.dart';
+import 'package:sync_net_and_local_db/feature/common/usecase/save_users_to_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_local_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_remote_repo.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_flow_usecase.dart';
@@ -16,6 +15,7 @@ import 'package:sync_net_and_local_db/feature/home/domain/usecase/remove_users_f
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/watch_users_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/presentation/provider/cubit/user_cubit.dart';
 import 'package:sync_net_and_local_db/feature/home/presentation/widgets/add_user_button.dart';
+import 'package:sync_net_and_local_db/feature/home/presentation/widgets/home_appbar.dart';
 import 'package:sync_net_and_local_db/feature/home/presentation/widgets/users_list_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -35,12 +35,10 @@ class HomeView extends StatelessWidget {
           GetUsersFromLocalUsecase(sl<IHomeLocalRepo>()),
         ),
       )..getUsersFlow(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(AppConstants.appName),
-        ),
-        body: const UsersListBody(),
-        floatingActionButton: const AddUserButton(),
+      child: const Scaffold(
+        appBar: HomeAppbar(),
+        body: UsersListBody(),
+        floatingActionButton: AddUserButton(),
       ),
     );
   }

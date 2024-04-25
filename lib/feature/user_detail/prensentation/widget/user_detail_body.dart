@@ -19,6 +19,16 @@ class UserDetailBody extends StatelessWidget {
     return BlocConsumer<UserDetailCubit, UserDetailState>(
       listener: (context, state) {
         state.maybeMap(
+          actionAddedToDb: (value) {
+            sl<INavigationService>().pop(context);
+            customSnackBar(
+              content:
+                  // ignore: lines_longer_than_80_chars
+                  "Your action added to Local DB. You can check it by going to 'Waiting List Page' from Home Page.",
+              color: Colors.orange,
+              context: context,
+            );
+          },
           userRemoved: (value) {
             sl<INavigationService>().pop(context);
             customSnackBar(

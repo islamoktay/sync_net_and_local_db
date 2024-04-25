@@ -8,4 +8,5 @@ class UserDetailState with _$UserDetailState {
   const factory UserDetailState.error() = _error;
   const factory UserDetailState.userRemoved() = _userRemoved;
   const factory UserDetailState.userUpdated() = _userUpdated;
+  const factory UserDetailState.actionAddedToDb() = _actionAddedToDb;
 }

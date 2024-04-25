@@ -1,0 +1,4 @@
+enum OfflineRequestStatus {
+  waiting,
+  success;
+}

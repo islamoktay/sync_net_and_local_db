@@ -44,8 +44,24 @@ const OfflineRequestLocalModelSchema = CollectionSchema(
       name: r'reason',
       type: IsarType.string,
     ),
-    r'url': PropertySchema(
+    r'remoteID': PropertySchema(
       id: 5,
+      name: r'remoteID',
+      type: IsarType.string,
+    ),
+    r'requestStatus': PropertySchema(
+      id: 6,
+      name: r'requestStatus',
+      type: IsarType.byte,
+      enumMap: _OfflineRequestLocalModelrequestStatusEnumValueMap,
+    ),
+    r'updatedTime': PropertySchema(
+      id: 7,
+      name: r'updatedTime',
+      type: IsarType.dateTime,
+    ),
+    r'url': PropertySchema(
+      id: 8,
       name: r'url',
       type: IsarType.string,
     )
@@ -95,6 +111,12 @@ int _offlineRequestLocalModelEstimateSize(
     }
   }
   {
+    final value = object.remoteID;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.url;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -114,7 +136,10 @@ void _offlineRequestLocalModelSerialize(
   writer.writeString(offsets[2], object.moduleName);
   writer.writeString(offsets[3], object.queryAsJson);
   writer.writeString(offsets[4], object.reason);
-  writer.writeString(offsets[5], object.url);
+  writer.writeString(offsets[5], object.remoteID);
+  writer.writeByte(offsets[6], object.requestStatus.index);
+  writer.writeDateTime(offsets[7], object.updatedTime);
+  writer.writeString(offsets[8], object.url);
 }
 
 OfflineRequestLocalModel _offlineRequestLocalModelDeserialize(
@@ -132,7 +157,12 @@ OfflineRequestLocalModel _offlineRequestLocalModelDeserialize(
   object.moduleName = reader.readStringOrNull(offsets[2]);
   object.queryAsJson = reader.readStringOrNull(offsets[3]);
   object.reason = reader.readStringOrNull(offsets[4]);
-  object.url = reader.readStringOrNull(offsets[5]);
+  object.remoteID = reader.readStringOrNull(offsets[5]);
+  object.requestStatus = _OfflineRequestLocalModelrequestStatusValueEnumMap[
+          reader.readByteOrNull(offsets[6])] ??
+      OfflineRequestStatus.waiting;
+  object.updatedTime = reader.readDateTimeOrNull(offsets[7]);
+  object.url = reader.readStringOrNull(offsets[8]);
   return object;
 }
 
@@ -157,6 +187,14 @@ P _offlineRequestLocalModelDeserializeProp<P>(
       return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
+    case 6:
+      return (_OfflineRequestLocalModelrequestStatusValueEnumMap[
+              reader.readByteOrNull(offset)] ??
+          OfflineRequestStatus.waiting) as P;
+    case 7:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 8:
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -173,6 +211,14 @@ const _OfflineRequestLocalModelmethodValueEnumMap = {
   1: RequestMethods.post,
   2: RequestMethods.patch,
   3: RequestMethods.delete,
+};
+const _OfflineRequestLocalModelrequestStatusEnumValueMap = {
+  'waiting': 0,
+  'success': 1,
+};
+const _OfflineRequestLocalModelrequestStatusValueEnumMap = {
+  0: OfflineRequestStatus.waiting,
+  1: OfflineRequestStatus.success,
 };
 
 Id _offlineRequestLocalModelGetId(OfflineRequestLocalModel object) {
@@ -1027,6 +1073,292 @@ extension OfflineRequestLocalModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'remoteID',
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'remoteID',
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteID',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'remoteID',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'remoteID',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'remoteID',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'remoteID',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'remoteID',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+          QAfterFilterCondition>
+      remoteIDContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'remoteID',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+          QAfterFilterCondition>
+      remoteIDMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'remoteID',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteID',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> remoteIDIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'remoteID',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> requestStatusEqualTo(OfflineRequestStatus value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'requestStatus',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> requestStatusGreaterThan(
+    OfflineRequestStatus value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'requestStatus',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> requestStatusLessThan(
+    OfflineRequestStatus value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'requestStatus',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> requestStatusBetween(
+    OfflineRequestStatus lower,
+    OfflineRequestStatus upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'requestStatus',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> updatedTimeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'updatedTime',
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> updatedTimeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'updatedTime',
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> updatedTimeEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> updatedTimeGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updatedTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> updatedTimeLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updatedTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
+      QAfterFilterCondition> updatedTimeBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updatedTime',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel,
       QAfterFilterCondition> urlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1262,6 +1594,48 @@ extension OfflineRequestLocalModelQuerySortBy on QueryBuilder<
   }
 
   QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      sortByRemoteID() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteID', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      sortByRemoteIDDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteID', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      sortByRequestStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'requestStatus', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      sortByRequestStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'requestStatus', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      sortByUpdatedTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedTime', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      sortByUpdatedTimeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedTime', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
       sortByUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'url', Sort.asc);
@@ -1363,6 +1737,48 @@ extension OfflineRequestLocalModelQuerySortThenBy on QueryBuilder<
   }
 
   QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      thenByRemoteID() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteID', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      thenByRemoteIDDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteID', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      thenByRequestStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'requestStatus', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      thenByRequestStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'requestStatus', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      thenByUpdatedTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedTime', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
+      thenByUpdatedTimeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updatedTime', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QAfterSortBy>
       thenByUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'url', Sort.asc);
@@ -1415,6 +1831,27 @@ extension OfflineRequestLocalModelQueryWhereDistinct on QueryBuilder<
   }
 
   QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QDistinct>
+      distinctByRemoteID({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'remoteID', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QDistinct>
+      distinctByRequestStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'requestStatus');
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QDistinct>
+      distinctByUpdatedTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'updatedTime');
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestLocalModel, QDistinct>
       distinctByUrl({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'url', caseSensitive: caseSensitive);
@@ -1462,6 +1899,27 @@ extension OfflineRequestLocalModelQueryProperty on QueryBuilder<
       reasonProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'reason');
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, String?, QQueryOperations>
+      remoteIDProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'remoteID');
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, OfflineRequestStatus, QQueryOperations>
+      requestStatusProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'requestStatus');
+    });
+  }
+
+  QueryBuilder<OfflineRequestLocalModel, DateTime?, QQueryOperations>
+      updatedTimeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'updatedTime');
     });
   }
 

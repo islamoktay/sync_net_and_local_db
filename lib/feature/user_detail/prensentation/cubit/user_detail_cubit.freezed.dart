@@ -24,6 +24,7 @@ mixin _$UserDetailState {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$UserDetailState {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$UserDetailState {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$UserDetailState {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$UserDetailState {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,7 @@ mixin _$UserDetailState {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +148,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) {
     return initial();
   }
@@ -155,6 +162,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) {
     return initial?.call();
   }
@@ -168,6 +176,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -185,6 +194,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) {
     return initial(this);
   }
@@ -198,6 +208,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) {
     return initial?.call(this);
   }
@@ -211,6 +222,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -268,6 +280,7 @@ class _$loadingImpl implements _loading {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) {
     return loading();
   }
@@ -281,6 +294,7 @@ class _$loadingImpl implements _loading {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) {
     return loading?.call();
   }
@@ -294,6 +308,7 @@ class _$loadingImpl implements _loading {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -311,6 +326,7 @@ class _$loadingImpl implements _loading {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) {
     return loading(this);
   }
@@ -324,6 +340,7 @@ class _$loadingImpl implements _loading {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) {
     return loading?.call(this);
   }
@@ -337,6 +354,7 @@ class _$loadingImpl implements _loading {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -394,6 +412,7 @@ class _$successImpl implements _success {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) {
     return success();
   }
@@ -407,6 +426,7 @@ class _$successImpl implements _success {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) {
     return success?.call();
   }
@@ -420,6 +440,7 @@ class _$successImpl implements _success {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -437,6 +458,7 @@ class _$successImpl implements _success {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) {
     return success(this);
   }
@@ -450,6 +472,7 @@ class _$successImpl implements _success {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) {
     return success?.call(this);
   }
@@ -463,6 +486,7 @@ class _$successImpl implements _success {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -520,6 +544,7 @@ class _$errorImpl implements _error {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) {
     return error();
   }
@@ -533,6 +558,7 @@ class _$errorImpl implements _error {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) {
     return error?.call();
   }
@@ -546,6 +572,7 @@ class _$errorImpl implements _error {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -563,6 +590,7 @@ class _$errorImpl implements _error {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) {
     return error(this);
   }
@@ -576,6 +604,7 @@ class _$errorImpl implements _error {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) {
     return error?.call(this);
   }
@@ -589,6 +618,7 @@ class _$errorImpl implements _error {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -646,6 +676,7 @@ class _$userRemovedImpl implements _userRemoved {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) {
     return userRemoved();
   }
@@ -659,6 +690,7 @@ class _$userRemovedImpl implements _userRemoved {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) {
     return userRemoved?.call();
   }
@@ -672,6 +704,7 @@ class _$userRemovedImpl implements _userRemoved {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (userRemoved != null) {
@@ -689,6 +722,7 @@ class _$userRemovedImpl implements _userRemoved {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) {
     return userRemoved(this);
   }
@@ -702,6 +736,7 @@ class _$userRemovedImpl implements _userRemoved {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) {
     return userRemoved?.call(this);
   }
@@ -715,6 +750,7 @@ class _$userRemovedImpl implements _userRemoved {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (userRemoved != null) {
@@ -772,6 +808,7 @@ class _$userUpdatedImpl implements _userUpdated {
     required TResult Function() error,
     required TResult Function() userRemoved,
     required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
   }) {
     return userUpdated();
   }
@@ -785,6 +822,7 @@ class _$userUpdatedImpl implements _userUpdated {
     TResult? Function()? error,
     TResult? Function()? userRemoved,
     TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
   }) {
     return userUpdated?.call();
   }
@@ -798,6 +836,7 @@ class _$userUpdatedImpl implements _userUpdated {
     TResult Function()? error,
     TResult Function()? userRemoved,
     TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (userUpdated != null) {
@@ -815,6 +854,7 @@ class _$userUpdatedImpl implements _userUpdated {
     required TResult Function(_error value) error,
     required TResult Function(_userRemoved value) userRemoved,
     required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
   }) {
     return userUpdated(this);
   }
@@ -828,6 +868,7 @@ class _$userUpdatedImpl implements _userUpdated {
     TResult? Function(_error value)? error,
     TResult? Function(_userRemoved value)? userRemoved,
     TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
   }) {
     return userUpdated?.call(this);
   }
@@ -841,6 +882,7 @@ class _$userUpdatedImpl implements _userUpdated {
     TResult Function(_error value)? error,
     TResult Function(_userRemoved value)? userRemoved,
     TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
     required TResult orElse(),
   }) {
     if (userUpdated != null) {
@@ -852,4 +894,136 @@ class _$userUpdatedImpl implements _userUpdated {
 
 abstract class _userUpdated implements UserDetailState {
   const factory _userUpdated() = _$userUpdatedImpl;
+}
+
+/// @nodoc
+abstract class _$$actionAddedToDbImplCopyWith<$Res> {
+  factory _$$actionAddedToDbImplCopyWith(_$actionAddedToDbImpl value,
+          $Res Function(_$actionAddedToDbImpl) then) =
+      __$$actionAddedToDbImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$actionAddedToDbImplCopyWithImpl<$Res>
+    extends _$UserDetailStateCopyWithImpl<$Res, _$actionAddedToDbImpl>
+    implements _$$actionAddedToDbImplCopyWith<$Res> {
+  __$$actionAddedToDbImplCopyWithImpl(
+      _$actionAddedToDbImpl _value, $Res Function(_$actionAddedToDbImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$actionAddedToDbImpl implements _actionAddedToDb {
+  const _$actionAddedToDbImpl();
+
+  @override
+  String toString() {
+    return 'UserDetailState.actionAddedToDb()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$actionAddedToDbImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+    required TResult Function() userRemoved,
+    required TResult Function() userUpdated,
+    required TResult Function() actionAddedToDb,
+  }) {
+    return actionAddedToDb();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+    TResult? Function()? userRemoved,
+    TResult? Function()? userUpdated,
+    TResult? Function()? actionAddedToDb,
+  }) {
+    return actionAddedToDb?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    TResult Function()? userRemoved,
+    TResult Function()? userUpdated,
+    TResult Function()? actionAddedToDb,
+    required TResult orElse(),
+  }) {
+    if (actionAddedToDb != null) {
+      return actionAddedToDb();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_loading value) loading,
+    required TResult Function(_success value) success,
+    required TResult Function(_error value) error,
+    required TResult Function(_userRemoved value) userRemoved,
+    required TResult Function(_userUpdated value) userUpdated,
+    required TResult Function(_actionAddedToDb value) actionAddedToDb,
+  }) {
+    return actionAddedToDb(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_loading value)? loading,
+    TResult? Function(_success value)? success,
+    TResult? Function(_error value)? error,
+    TResult? Function(_userRemoved value)? userRemoved,
+    TResult? Function(_userUpdated value)? userUpdated,
+    TResult? Function(_actionAddedToDb value)? actionAddedToDb,
+  }) {
+    return actionAddedToDb?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_loading value)? loading,
+    TResult Function(_success value)? success,
+    TResult Function(_error value)? error,
+    TResult Function(_userRemoved value)? userRemoved,
+    TResult Function(_userUpdated value)? userUpdated,
+    TResult Function(_actionAddedToDb value)? actionAddedToDb,
+    required TResult orElse(),
+  }) {
+    if (actionAddedToDb != null) {
+      return actionAddedToDb(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _actionAddedToDb implements UserDetailState {
+  const factory _actionAddedToDb() = _$actionAddedToDbImpl;
 }

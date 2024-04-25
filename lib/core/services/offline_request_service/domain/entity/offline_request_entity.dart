@@ -1,17 +1,28 @@
 import 'package:sync_net_and_local_db/core/enums/request_methods.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/enum/offline_request_status.dart';
 
 class OfflineRequestEntity {
   const OfflineRequestEntity({
-    required this.reason,
-    required this.content,
+    required this.url,
     required this.method,
+    required this.updatedTime,
     required this.moduleName,
-    required this.localId,
+    required this.status,
+    this.reason,
+    this.localId,
+    this.remoteID,
+    this.body,
+    this.query,
   });
 
-  final String? content;
-  final RequestMethods? method;
+  final int? localId;
+  final String url;
+  final RequestMethods method;
+  final OfflineRequestStatus status;
+  final String? body;
+  final String? query;
+  final String? remoteID;
+  final DateTime updatedTime;
   final String? reason;
   final String? moduleName;
-  final int localId;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:sync_net_and_local_db/core/exception/offline_save_exception.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_remote_usecase.dart';
@@ -34,15 +35,17 @@ class UserDetailCubit extends Cubit<UserDetailState> {
       emit(const UserDetailState.loading());
 
       final id = await _createUserUsecase(user);
-      
+
       if (id?.isNotEmpty ?? false) {
         user.id = id;
         await _saveUsersToLocalUsecase([user]);
       } else {
         emit(const UserDetailState.error());
       }
-      
+
       emit(const UserDetailState.success());
+    } on OfflineSaveException catch (_) {
+      emit(const UserDetailState.actionAddedToDb());
     } catch (_) {
       emit(const UserDetailState.error());
     } finally {
@@ -58,6 +61,8 @@ class UserDetailCubit extends Cubit<UserDetailState> {
       await _updateUserInLocalUsecase(user);
 
       emit(const UserDetailState.userUpdated());
+    } on OfflineSaveException catch (_) {
+      emit(const UserDetailState.actionAddedToDb());
     } catch (_) {
       emit(const UserDetailState.error());
     } finally {
@@ -73,6 +78,8 @@ class UserDetailCubit extends Cubit<UserDetailState> {
       await _removeUserFromLocalUsecase(user);
 
       emit(const UserDetailState.userRemoved());
+    } on OfflineSaveException catch (_) {
+      emit(const UserDetailState.actionAddedToDb());
     } catch (_) {
       emit(const UserDetailState.error());
     } finally {
