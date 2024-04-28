@@ -40,7 +40,7 @@ class HomeView extends StatelessWidget {
             ),
           )..getUsersFlow(),
         ),
-        BlocProvider.value(value: sl<OfflineCubit>())
+        BlocProvider.value(value: sl<OfflineCubit>()),
       ],
       child: const Scaffold(
         appBar: HomeAppbar(),

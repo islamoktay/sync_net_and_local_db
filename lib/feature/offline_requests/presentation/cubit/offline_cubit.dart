@@ -100,7 +100,6 @@ class OfflineCubit extends Cubit<OfflineState> {
 
   void initNetworkWatcher() {
     _watchNetworkUsecase.call((val) async {
-      print(123);
       if (val) await sendRequest();
     });
   }
@@ -202,10 +201,11 @@ class OfflineCubit extends Cubit<OfflineState> {
       final result = arrangeList(list);
       emit(
         OfflineState.initial(
-            waitingList: result.$1,
-            successList: result.$2,
-            notSentList: result.$3,
-            sentLocalIDs: sentIDs),
+          waitingList: result.$1,
+          successList: result.$2,
+          notSentList: result.$3,
+          sentLocalIDs: sentIDs,
+        ),
       );
     } catch (_) {
       return;
