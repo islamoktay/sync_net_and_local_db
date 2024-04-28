@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:sync_net_and_local_db/core/exception/offline_save_exception.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/usecase/remove_user_from_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/usecase/remove_user_from_remote_usecase.dart';
@@ -23,7 +24,9 @@ class RemoveUserCubit extends Cubit<RemoveUserState> {
       await _removeUserFromRemoteUsecase(user);
       await _removeUserFromLocalUsecase(user);
       emit(const RemoveUserState.success());
-    } catch (_) {
+    } on OfflineSaveException catch (_) {
+      emit(const RemoveUserState.removeUserOfflineSave());
+    } catch (e) {
       emit(const RemoveUserState.error());
     } finally {
       emit(const RemoveUserState.initial());

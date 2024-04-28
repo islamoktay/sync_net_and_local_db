@@ -22,6 +22,7 @@ mixin _$RemoveUserState {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() removeUserOfflineSave,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$RemoveUserState {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? removeUserOfflineSave,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$RemoveUserState {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? removeUserOfflineSave,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,8 @@ mixin _$RemoveUserState {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_removeUserOfflineSave value)
+        removeUserOfflineSave,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +60,7 @@ mixin _$RemoveUserState {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_removeUserOfflineSave value)? removeUserOfflineSave,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +69,7 @@ mixin _$RemoveUserState {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_removeUserOfflineSave value)? removeUserOfflineSave,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +135,7 @@ class _$initialImpl implements _initial {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() removeUserOfflineSave,
   }) {
     return initial();
   }
@@ -139,6 +147,7 @@ class _$initialImpl implements _initial {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? removeUserOfflineSave,
   }) {
     return initial?.call();
   }
@@ -150,6 +159,7 @@ class _$initialImpl implements _initial {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,6 +175,8 @@ class _$initialImpl implements _initial {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_removeUserOfflineSave value)
+        removeUserOfflineSave,
   }) {
     return initial(this);
   }
@@ -176,6 +188,7 @@ class _$initialImpl implements _initial {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_removeUserOfflineSave value)? removeUserOfflineSave,
   }) {
     return initial?.call(this);
   }
@@ -187,6 +200,7 @@ class _$initialImpl implements _initial {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_removeUserOfflineSave value)? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -242,6 +256,7 @@ class _$loadingImpl implements _loading {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() removeUserOfflineSave,
   }) {
     return loading();
   }
@@ -253,6 +268,7 @@ class _$loadingImpl implements _loading {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? removeUserOfflineSave,
   }) {
     return loading?.call();
   }
@@ -264,6 +280,7 @@ class _$loadingImpl implements _loading {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -279,6 +296,8 @@ class _$loadingImpl implements _loading {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_removeUserOfflineSave value)
+        removeUserOfflineSave,
   }) {
     return loading(this);
   }
@@ -290,6 +309,7 @@ class _$loadingImpl implements _loading {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_removeUserOfflineSave value)? removeUserOfflineSave,
   }) {
     return loading?.call(this);
   }
@@ -301,6 +321,7 @@ class _$loadingImpl implements _loading {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_removeUserOfflineSave value)? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -356,6 +377,7 @@ class _$successImpl implements _success {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() removeUserOfflineSave,
   }) {
     return success();
   }
@@ -367,6 +389,7 @@ class _$successImpl implements _success {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? removeUserOfflineSave,
   }) {
     return success?.call();
   }
@@ -378,6 +401,7 @@ class _$successImpl implements _success {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -393,6 +417,8 @@ class _$successImpl implements _success {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_removeUserOfflineSave value)
+        removeUserOfflineSave,
   }) {
     return success(this);
   }
@@ -404,6 +430,7 @@ class _$successImpl implements _success {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_removeUserOfflineSave value)? removeUserOfflineSave,
   }) {
     return success?.call(this);
   }
@@ -415,6 +442,7 @@ class _$successImpl implements _success {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_removeUserOfflineSave value)? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -470,6 +498,7 @@ class _$errorImpl implements _error {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function() error,
+    required TResult Function() removeUserOfflineSave,
   }) {
     return error();
   }
@@ -481,6 +510,7 @@ class _$errorImpl implements _error {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function()? error,
+    TResult? Function()? removeUserOfflineSave,
   }) {
     return error?.call();
   }
@@ -492,6 +522,7 @@ class _$errorImpl implements _error {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function()? error,
+    TResult Function()? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -507,6 +538,8 @@ class _$errorImpl implements _error {
     required TResult Function(_loading value) loading,
     required TResult Function(_success value) success,
     required TResult Function(_error value) error,
+    required TResult Function(_removeUserOfflineSave value)
+        removeUserOfflineSave,
   }) {
     return error(this);
   }
@@ -518,6 +551,7 @@ class _$errorImpl implements _error {
     TResult? Function(_loading value)? loading,
     TResult? Function(_success value)? success,
     TResult? Function(_error value)? error,
+    TResult? Function(_removeUserOfflineSave value)? removeUserOfflineSave,
   }) {
     return error?.call(this);
   }
@@ -529,6 +563,7 @@ class _$errorImpl implements _error {
     TResult Function(_loading value)? loading,
     TResult Function(_success value)? success,
     TResult Function(_error value)? error,
+    TResult Function(_removeUserOfflineSave value)? removeUserOfflineSave,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -540,4 +575,127 @@ class _$errorImpl implements _error {
 
 abstract class _error implements RemoveUserState {
   const factory _error() = _$errorImpl;
+}
+
+/// @nodoc
+abstract class _$$removeUserOfflineSaveImplCopyWith<$Res> {
+  factory _$$removeUserOfflineSaveImplCopyWith(
+          _$removeUserOfflineSaveImpl value,
+          $Res Function(_$removeUserOfflineSaveImpl) then) =
+      __$$removeUserOfflineSaveImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$removeUserOfflineSaveImplCopyWithImpl<$Res>
+    extends _$RemoveUserStateCopyWithImpl<$Res, _$removeUserOfflineSaveImpl>
+    implements _$$removeUserOfflineSaveImplCopyWith<$Res> {
+  __$$removeUserOfflineSaveImplCopyWithImpl(_$removeUserOfflineSaveImpl _value,
+      $Res Function(_$removeUserOfflineSaveImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$removeUserOfflineSaveImpl implements _removeUserOfflineSave {
+  const _$removeUserOfflineSaveImpl();
+
+  @override
+  String toString() {
+    return 'RemoveUserState.removeUserOfflineSave()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$removeUserOfflineSaveImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+    required TResult Function() removeUserOfflineSave,
+  }) {
+    return removeUserOfflineSave();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+    TResult? Function()? removeUserOfflineSave,
+  }) {
+    return removeUserOfflineSave?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    TResult Function()? removeUserOfflineSave,
+    required TResult orElse(),
+  }) {
+    if (removeUserOfflineSave != null) {
+      return removeUserOfflineSave();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_loading value) loading,
+    required TResult Function(_success value) success,
+    required TResult Function(_error value) error,
+    required TResult Function(_removeUserOfflineSave value)
+        removeUserOfflineSave,
+  }) {
+    return removeUserOfflineSave(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_loading value)? loading,
+    TResult? Function(_success value)? success,
+    TResult? Function(_error value)? error,
+    TResult? Function(_removeUserOfflineSave value)? removeUserOfflineSave,
+  }) {
+    return removeUserOfflineSave?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initial value)? initial,
+    TResult Function(_loading value)? loading,
+    TResult Function(_success value)? success,
+    TResult Function(_error value)? error,
+    TResult Function(_removeUserOfflineSave value)? removeUserOfflineSave,
+    required TResult orElse(),
+  }) {
+    if (removeUserOfflineSave != null) {
+      return removeUserOfflineSave(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _removeUserOfflineSave implements RemoveUserState {
+  const factory _removeUserOfflineSave() = _$removeUserOfflineSaveImpl;
 }
