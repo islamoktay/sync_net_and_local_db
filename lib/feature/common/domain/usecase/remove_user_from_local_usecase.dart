@@ -1,6 +1,6 @@
 import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/repo/i_common_local_repo.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/i_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/i_usecase.dart';
 
 class RemoveUserFromLocalUsecase implements Usecase<void, User> {
   const RemoveUserFromLocalUsecase(this._repo);

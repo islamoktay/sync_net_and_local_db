@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:sync_net_and_local_db/core/constant/app_constants.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/services/local_storage_service/i_local_storage_service.dart';
 import 'package:sync_net_and_local_db/core/services/navigation_service/i_navigation_service.dart';
+import 'package:sync_net_and_local_db/feature/offline_requests/presentation/cubit/offline_cubit.dart';
 
 class SettingsButton extends StatelessWidget {
   const SettingsButton({super.key});
@@ -28,9 +31,16 @@ class SettingsButton extends StatelessWidget {
                 "\n\nCurrent Status: ${isAuto ? 'Auto-Sync' : 'by Hand'}",
               ),
               actions: [
-                ElevatedButton(
-                  onPressed: () => _syncMethod(context, 'true'),
-                  child: const Text('Auto-Sync'),
+                BlocProvider.value(
+                  value: sl<OfflineCubit>(),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      sl<OfflineCubit>().sendRequest();
+                      sl<OfflineCubit>().initNetworkWatcher();
+                      _syncMethod(context, 'true');
+                    },
+                    child: const Text('Auto-Sync'),
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () => _syncMethod(context, 'false'),

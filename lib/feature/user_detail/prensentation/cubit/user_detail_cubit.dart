@@ -3,9 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:sync_net_and_local_db/core/exception/offline_save_exception.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_local_usecase.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_remote_usecase.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/save_users_to_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/remove_user_from_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/remove_user_from_remote_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/save_users_to_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/domain/usecase/create_user_usecase.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/domain/usecase/update_user_in_local_usecase.dart';
 import 'package:sync_net_and_local_db/feature/user_detail/domain/usecase/update_user_in_remote_usecase.dart';

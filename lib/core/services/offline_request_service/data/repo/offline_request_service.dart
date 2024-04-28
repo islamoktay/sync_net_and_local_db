@@ -4,6 +4,7 @@ import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_
 import 'package:sync_net_and_local_db/core/services/network_service/i_network_service.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/data/model/local/offline_request_local_model.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/offline_request_entity.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/enum/offline_request_status.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/repo/i_offline_request_service.dart';
 
 class OfflineRequestService implements IOfflineRequestService {
@@ -25,7 +26,6 @@ class OfflineRequestService implements IOfflineRequestService {
   Future<void> saveRequest(OfflineRequestEntity item) async {
     try {
       final request = OfflineRequestLocalModel().fromEntity(item);
-
       await _localDBService.saveData<OfflineRequestLocalModel>(request);
     } catch (e) {
       rethrow;
@@ -33,33 +33,21 @@ class OfflineRequestService implements IOfflineRequestService {
   }
 
   @override
-  Future<void> sendRequests(bool isRemoteCheck) async {
+  Future<void> sendRequest(OfflineRequestEntity entity) async {
     try {
-      final list = await _localDBService.getData<OfflineRequestLocalModel>();
-      for (final request in list) {
-        try {
-          if ((request.url?.isNotEmpty ?? false) &&
-              (request.bodyAsJson?.isNotEmpty ?? false)) {
-            /// if there will be a control for sending request,
-            /// i think this control must be in backend.
-            /// because I will be checking local data with remote data.
-            /// so it will be a two times job instead of one for our side.
-            /// but I am putting it here anyway.
-            if (isRemoteCheck) {
-              await _networkService.networkRequest(
-                request.url!,
-                method: request.method,
-                body: jsonDecode(request.bodyAsJson!) as Map<String, dynamic>,
-              );
+      final item = OfflineRequestLocalModel().fromEntity(entity);
+      if (item.url?.isNotEmpty ?? false) {
+        await _networkService.networkRequest(
+          item.url!,
+          method: item.method,
+          body: item.bodyAsJson == null
+              ? null
+              : jsonDecode(item.bodyAsJson!) as Map<String, dynamic>,
+        );
 
-              if (request.id != null) {
-                await _localDBService
-                    .removeData<OfflineRequestLocalModel>(request.id!);
-              }
-            }
-          }
-        } catch (_) {
-          continue;
+        if (item.id != null) {
+          item.requestStatus = OfflineRequestStatus.success;
+          await _localDBService.updateData<OfflineRequestLocalModel>(item);
         }
       }
     } catch (_) {

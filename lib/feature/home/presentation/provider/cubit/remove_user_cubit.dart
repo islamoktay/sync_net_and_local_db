@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_local_usecase.dart';
-import 'package:sync_net_and_local_db/feature/common/usecase/remove_user_from_remote_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/remove_user_from_local_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/remove_user_from_remote_usecase.dart';
 
 part 'remove_user_state.dart';
 part 'remove_user_cubit.freezed.dart';

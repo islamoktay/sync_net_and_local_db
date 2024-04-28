@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import 'package:sync_net_and_local_db/core/services/network_status_service/i_network_status_service.dart';
+import 'package:sync_net_and_local_db/core/services/network_status_service/domain/repo/i_network_status_service.dart';
 
 class NetworkStatusService implements INetworkStatusService {
   NetworkStatusService(this._connectivity);

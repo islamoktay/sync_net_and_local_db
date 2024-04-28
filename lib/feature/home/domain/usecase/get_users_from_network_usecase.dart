@@ -1,4 +1,4 @@
-import 'package:sync_net_and_local_db/feature/common/usecase/i_usecase.dart';
+import 'package:sync_net_and_local_db/feature/common/domain/usecase/i_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/entity/user.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/repo/i_home_remote_repo.dart';
 
