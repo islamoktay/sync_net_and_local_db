@@ -26,7 +26,9 @@ class RemoveUserCubit extends Cubit<RemoveUserState> {
       emit(const RemoveUserState.success());
     } on OfflineSaveException catch (_) {
       emit(const RemoveUserState.removeUserOfflineSave());
-    } catch (e) {
+    } catch (e, s) {
+      print(e);
+      print(s);
       emit(const RemoveUserState.error());
     } finally {
       emit(const RemoveUserState.initial());

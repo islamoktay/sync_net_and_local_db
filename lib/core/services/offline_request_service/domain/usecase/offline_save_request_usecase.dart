@@ -10,8 +10,10 @@ class OfflineSaveRequestUsecase implements Usecase<void, OfflineRequestEntity> {
   Future<void> call(OfflineRequestEntity req) async {
     final list = await _service.getRequests();
     for (final element in list) {
-      if (req.localId != null && (element.localId == req.localId)) {
-        await _service.removeRequest(req.localId!);
+      if ((element.localId != null) &&
+          (req.remoteID != null) &&
+          (element.remoteID == req.remoteID)) {
+        await _service.removeRequest(element.localId!);
       }
     }
     return _service.saveRequest(req);
