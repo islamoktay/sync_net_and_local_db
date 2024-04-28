@@ -6,6 +6,7 @@ class OfflineState with _$OfflineState {
     @Default(<OfflineRequestEntity>[]) List<OfflineRequestEntity> waitingList,
     @Default(<OfflineRequestEntity>[]) List<OfflineRequestEntity> successList,
     @Default(<OfflineRequestEntity>[]) List<OfflineRequestEntity> notSentList,
+    @Default(<int>[]) List<int> sentLocalIDs,
   }) = _Initial;
   const factory OfflineState.noNetwork() = _noNetwork;
   const factory OfflineState.emptyList() = _emptyList;

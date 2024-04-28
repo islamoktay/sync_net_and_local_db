@@ -13,7 +13,7 @@ class OfflineSaveRequestUsecase implements Usecase<void, OfflineRequestEntity> {
       if ((element.localId != null) &&
           (req.remoteID != null) &&
           (element.remoteID == req.remoteID)) {
-        return _service.updateRequest(element);
+        await _service.removeRequest(element.localId!);
       }
     }
     return _service.saveRequest(req);

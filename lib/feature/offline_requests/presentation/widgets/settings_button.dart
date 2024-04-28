@@ -35,7 +35,7 @@ class SettingsButton extends StatelessWidget {
                   value: sl<OfflineCubit>(),
                   child: ElevatedButton(
                     onPressed: () {
-                      sl<OfflineCubit>().sendRequest();
+                      sl<OfflineCubit>().sendRequest(isTriggeredByHand: true);
                       sl<OfflineCubit>().initNetworkWatcher();
                       _syncMethod(context, 'true');
                     },

@@ -21,7 +21,8 @@ mixin _$OfflineState {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -36,7 +37,8 @@ mixin _$OfflineState {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -51,7 +53,8 @@ mixin _$OfflineState {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -125,7 +128,8 @@ abstract class _$$InitialImplCopyWith<$Res> {
   $Res call(
       {List<OfflineRequestEntity> waitingList,
       List<OfflineRequestEntity> successList,
-      List<OfflineRequestEntity> notSentList});
+      List<OfflineRequestEntity> notSentList,
+      List<int> sentLocalIDs});
 }
 
 /// @nodoc
@@ -142,6 +146,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? waitingList = null,
     Object? successList = null,
     Object? notSentList = null,
+    Object? sentLocalIDs = null,
   }) {
     return _then(_$InitialImpl(
       waitingList: null == waitingList
@@ -156,6 +161,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._notSentList
           : notSentList // ignore: cast_nullable_to_non_nullable
               as List<OfflineRequestEntity>,
+      sentLocalIDs: null == sentLocalIDs
+          ? _value._sentLocalIDs
+          : sentLocalIDs // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -169,10 +178,12 @@ class _$InitialImpl implements _Initial {
       final List<OfflineRequestEntity> successList =
           const <OfflineRequestEntity>[],
       final List<OfflineRequestEntity> notSentList =
-          const <OfflineRequestEntity>[]})
+          const <OfflineRequestEntity>[],
+      final List<int> sentLocalIDs = const <int>[]})
       : _waitingList = waitingList,
         _successList = successList,
-        _notSentList = notSentList;
+        _notSentList = notSentList,
+        _sentLocalIDs = sentLocalIDs;
 
   final List<OfflineRequestEntity> _waitingList;
   @override
@@ -201,9 +212,18 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_notSentList);
   }
 
+  final List<int> _sentLocalIDs;
+  @override
+  @JsonKey()
+  List<int> get sentLocalIDs {
+    if (_sentLocalIDs is EqualUnmodifiableListView) return _sentLocalIDs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sentLocalIDs);
+  }
+
   @override
   String toString() {
-    return 'OfflineState.initial(waitingList: $waitingList, successList: $successList, notSentList: $notSentList)';
+    return 'OfflineState.initial(waitingList: $waitingList, successList: $successList, notSentList: $notSentList, sentLocalIDs: $sentLocalIDs)';
   }
 
   @override
@@ -216,7 +236,9 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality()
                 .equals(other._successList, _successList) &&
             const DeepCollectionEquality()
-                .equals(other._notSentList, _notSentList));
+                .equals(other._notSentList, _notSentList) &&
+            const DeepCollectionEquality()
+                .equals(other._sentLocalIDs, _sentLocalIDs));
   }
 
   @override
@@ -224,7 +246,8 @@ class _$InitialImpl implements _Initial {
       runtimeType,
       const DeepCollectionEquality().hash(_waitingList),
       const DeepCollectionEquality().hash(_successList),
-      const DeepCollectionEquality().hash(_notSentList));
+      const DeepCollectionEquality().hash(_notSentList),
+      const DeepCollectionEquality().hash(_sentLocalIDs));
 
   @JsonKey(ignore: true)
   @override
@@ -238,7 +261,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -247,7 +271,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() success,
     required TResult Function(String items) someNotSent,
   }) {
-    return initial(waitingList, successList, notSentList);
+    return initial(waitingList, successList, notSentList, sentLocalIDs);
   }
 
   @override
@@ -256,7 +280,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -265,7 +290,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? success,
     TResult? Function(String items)? someNotSent,
   }) {
-    return initial?.call(waitingList, successList, notSentList);
+    return initial?.call(waitingList, successList, notSentList, sentLocalIDs);
   }
 
   @override
@@ -274,7 +299,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -285,7 +311,7 @@ class _$InitialImpl implements _Initial {
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(waitingList, successList, notSentList);
+      return initial(waitingList, successList, notSentList, sentLocalIDs);
     }
     return orElse();
   }
@@ -341,11 +367,13 @@ abstract class _Initial implements OfflineState {
   const factory _Initial(
       {final List<OfflineRequestEntity> waitingList,
       final List<OfflineRequestEntity> successList,
-      final List<OfflineRequestEntity> notSentList}) = _$InitialImpl;
+      final List<OfflineRequestEntity> notSentList,
+      final List<int> sentLocalIDs}) = _$InitialImpl;
 
   List<OfflineRequestEntity> get waitingList;
   List<OfflineRequestEntity> get successList;
   List<OfflineRequestEntity> get notSentList;
+  List<int> get sentLocalIDs;
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -392,7 +420,8 @@ class _$noNetworkImpl implements _noNetwork {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -410,7 +439,8 @@ class _$noNetworkImpl implements _noNetwork {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -428,7 +458,8 @@ class _$noNetworkImpl implements _noNetwork {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -536,7 +567,8 @@ class _$emptyListImpl implements _emptyList {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -554,7 +586,8 @@ class _$emptyListImpl implements _emptyList {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -572,7 +605,8 @@ class _$emptyListImpl implements _emptyList {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -680,7 +714,8 @@ class _$loadingImpl implements _loading {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -698,7 +733,8 @@ class _$loadingImpl implements _loading {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -716,7 +752,8 @@ class _$loadingImpl implements _loading {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -824,7 +861,8 @@ class _$errorImpl implements _error {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -842,7 +880,8 @@ class _$errorImpl implements _error {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -860,7 +899,8 @@ class _$errorImpl implements _error {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -968,7 +1008,8 @@ class _$successImpl implements _success {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -986,7 +1027,8 @@ class _$successImpl implements _success {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -1004,7 +1046,8 @@ class _$successImpl implements _success {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
@@ -1138,7 +1181,8 @@ class _$someNotSentImpl implements _someNotSent {
     required TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
@@ -1156,7 +1200,8 @@ class _$someNotSentImpl implements _someNotSent {
     TResult? Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
@@ -1174,7 +1219,8 @@ class _$someNotSentImpl implements _someNotSent {
     TResult Function(
             List<OfflineRequestEntity> waitingList,
             List<OfflineRequestEntity> successList,
-            List<OfflineRequestEntity> notSentList)?
+            List<OfflineRequestEntity> notSentList,
+            List<int> sentLocalIDs)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,

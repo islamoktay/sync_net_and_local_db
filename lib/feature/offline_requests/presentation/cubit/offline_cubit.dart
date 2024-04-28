@@ -100,18 +100,22 @@ class OfflineCubit extends Cubit<OfflineState> {
 
   void initNetworkWatcher() {
     _watchNetworkUsecase.call((val) async {
-      if (val) {
-        await sendRequest();
-      }
+      print(123);
+      if (val) await sendRequest();
     });
   }
 
   Future<void> sendRequest({bool isTriggeredByHand = false}) async {
+    final sentIDs = state.maybeMap(
+      initial: (value) => value.sentLocalIDs,
+      orElse: () => <int>[],
+    );
     try {
       final waiting = state.maybeMap(
         initial: (value) => value.waitingList,
         orElse: () => <OfflineRequestEntity>[],
       );
+
       emit(const OfflineState.loading());
       final hasNetwork = await _checkNetworkUsecase(null);
       if (hasNetwork) {
@@ -130,19 +134,18 @@ class OfflineCubit extends Cubit<OfflineState> {
           /// }
           final notSentActions = <String>[];
           for (final item in waiting) {
-            if (item.remoteID == null) {
-              await _offlineSendRequestUsecase(item);
-            } else {
-              final shouldSend = await controlReq(item);
-              if (shouldSend) {
+            final shouldSend = await controlReq(item);
+            if (shouldSend) {
+              if (!sentIDs.contains(item.localId)) {
                 await _offlineSendRequestUsecase(item);
-              } else {
-                if (!notSentActions.contains(item.moduleName)) {
-                  notSentActions.add(item.moduleName ?? 'Not known module');
-                }
-                item.status = OfflineRequestStatus.notSent;
-                await _offlineUpdateRequestUsecase(item);
+                sentIDs.add(item.localId ?? 0);
               }
+            } else {
+              if (!notSentActions.contains(item.moduleName)) {
+                notSentActions.add(item.moduleName ?? 'Not known module');
+              }
+              item.status = OfflineRequestStatus.notSent;
+              await _offlineUpdateRequestUsecase(item);
             }
           }
           if (notSentActions.isEmpty) {
@@ -154,29 +157,34 @@ class OfflineCubit extends Cubit<OfflineState> {
           await _getUsersFlowUsecase(null);
         }
       } else {
-        emit(const OfflineState.noNetwork());
+        if (waiting.isEmpty) {
+          if (isTriggeredByHand) emit(const OfflineState.emptyList());
+        } else {
+          emit(const OfflineState.noNetwork());
+        }
       }
     } catch (_) {
       emit(const OfflineState.error());
       rethrow;
     } finally {
-      await getRequestsFromLocal();
+      await getRequestsFromLocal(sentIDs: sentIDs);
     }
   }
 
   Future<bool> controlReq(OfflineRequestEntity item) async {
+    if (item.remoteID == null) return true;
     final list = await _getUsersFromNetworkUsecase(null);
     for (final element in list) {
       if (element.id == item.remoteID) {
         if (element.updatedTime != null) {
-          return true;
-        } else {
           final isAfter = element.updatedTime!.isAfter(item.updatedTime);
           if (isAfter) {
             return false;
           } else {
             return true;
           }
+        } else {
+          return true;
         }
       }
     }
@@ -188,16 +196,16 @@ class OfflineCubit extends Cubit<OfflineState> {
     initWatcherLocalDB();
   }
 
-  Future<void> getRequestsFromLocal() async {
+  Future<void> getRequestsFromLocal({List<int> sentIDs = const <int>[]}) async {
     try {
       final list = await _offlineGetRequestUsecase(null);
       final result = arrangeList(list);
       emit(
         OfflineState.initial(
-          waitingList: result.$1,
-          successList: result.$2,
-          notSentList: result.$3,
-        ),
+            waitingList: result.$1,
+            successList: result.$2,
+            notSentList: result.$3,
+            sentLocalIDs: sentIDs),
       );
     } catch (_) {
       return;

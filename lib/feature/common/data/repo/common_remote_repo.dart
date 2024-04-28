@@ -33,7 +33,6 @@ class CommonRemoteRepo implements ICommonRemoteRepo {
         status: OfflineRequestStatus.waiting,
         updatedTime: DateTime.now(),
       );
-
       await _offlineSaveRequestUsecase(request);
       rethrow;
     } catch (_) {
