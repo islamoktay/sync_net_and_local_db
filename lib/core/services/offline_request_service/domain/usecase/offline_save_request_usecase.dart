@@ -8,6 +8,12 @@ class OfflineSaveRequestUsecase implements Usecase<void, OfflineRequestEntity> {
 
   @override
   Future<void> call(OfflineRequestEntity req) async {
+    final list = await _service.getRequests();
+    for (final element in list) {
+      if (req.localId != null && (element.localId == req.localId)) {
+        await _service.removeRequest(req.localId!);
+      }
+    }
     return _service.saveRequest(req);
   }
 }
