@@ -15,6 +15,12 @@ class OfflineRequestTabsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<OfflineCubit, OfflineState>(
       listener: (context, state) => state.maybeMap(
+        someNotSent: (value) => customSnackBar(
+          content: 'Some requests could not be sent because of the control. '
+              'Here is the not sent items: $value',
+          color: Colors.orange,
+          context: context,
+        ),
         emptyList: (value) => customSnackBar(
           content: 'There is no network request to send.',
           color: Colors.orange,
@@ -48,6 +54,7 @@ class OfflineRequestTabsView extends StatelessWidget {
               children: [
                 OfflineRequestsList(list: value.waitingList),
                 OfflineRequestsList(list: value.successList),
+                OfflineRequestsList(list: value.notSentList),
               ],
             );
           },

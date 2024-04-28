@@ -11,8 +11,10 @@ import 'package:sync_net_and_local_db/core/services/offline_request_service/doma
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_delete_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_get_requests_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_send_request_usecase.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_update_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_watch_db_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/usecase/get_users_flow_usecase.dart';
+import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_from_network_usecase.dart';
 
 part 'offline_state.dart';
 part 'offline_cubit.freezed.dart';
@@ -25,6 +27,8 @@ class OfflineCubit extends Cubit<OfflineState> {
     this._offlineSendRequestUsecase,
     this._watchNetworkUsecase,
     this._offlineDeleteRequestUsecase,
+    this._getUsersFromNetworkUsecase,
+    this._offlineUpdateRequestUsecase,
     this._getUsersFlowUsecase,
   ) : super(const OfflineState.initial()) {
     getRequestsFlow().whenComplete(
@@ -46,6 +50,8 @@ class OfflineCubit extends Cubit<OfflineState> {
   final WatchNetworkUsecase _watchNetworkUsecase;
   final OfflineDeleteRequestUsecase _offlineDeleteRequestUsecase;
   final GetUsersFlowUsecase _getUsersFlowUsecase;
+  final OfflineUpdateRequestUsecase _offlineUpdateRequestUsecase;
+  final GetUsersFromNetworkUsecase _getUsersFromNetworkUsecase;
 
   Future<void> removeWaitingList() async {
     try {
@@ -100,7 +106,7 @@ class OfflineCubit extends Cubit<OfflineState> {
     });
   }
 
-  Future<void> sendRequest() async {
+  Future<void> sendRequest({bool isTriggeredByHand = false}) async {
     try {
       final waiting = state.maybeMap(
         initial: (value) => value.waitingList,
@@ -110,12 +116,41 @@ class OfflineCubit extends Cubit<OfflineState> {
       final hasNetwork = await _checkNetworkUsecase(null);
       if (hasNetwork) {
         if (waiting.isEmpty) {
-          emit(const OfflineState.emptyList());
+          if (isTriggeredByHand) emit(const OfflineState.emptyList());
         } else {
+          /// Here there should be only 'OfflineSendRequestUsecase'
+          /// and no control for the client side,
+          /// the control (is for if item should be inserted into remote db)
+          /// should be in the backend side in my humble opinion
+          /// but I am putting the control here for this demo
+          ///
+          /// e.g.:
+          /// for (final item in waiting) {
+          ///     await _offlineSendRequestUsecase(item);
+          /// }
+          final notSentActions = <String>[];
           for (final item in waiting) {
-            await _offlineSendRequestUsecase(item);
+            if (item.remoteID == null) {
+              await _offlineSendRequestUsecase(item);
+            } else {
+              final shouldSend = await controlReq(item);
+              if (shouldSend) {
+                await _offlineSendRequestUsecase(item);
+              } else {
+                if (!notSentActions.contains(item.moduleName)) {
+                  notSentActions.add(item.moduleName ?? 'Not known module');
+                }
+                item.status = OfflineRequestStatus.notSent;
+                await _offlineUpdateRequestUsecase(item);
+              }
+            }
           }
-          emit(const OfflineState.success());
+          if (notSentActions.isEmpty) {
+            emit(const OfflineState.success());
+          } else {
+            final items = notSentActions.join(', ');
+            emit(OfflineState.someNotSent(items));
+          }
           await _getUsersFlowUsecase(null);
         }
       } else {
@@ -127,6 +162,25 @@ class OfflineCubit extends Cubit<OfflineState> {
     } finally {
       await getRequestsFromLocal();
     }
+  }
+
+  Future<bool> controlReq(OfflineRequestEntity item) async {
+    final list = await _getUsersFromNetworkUsecase(null);
+    for (final element in list) {
+      if (element.id == item.remoteID) {
+        if (element.updatedTime != null) {
+          return true;
+        } else {
+          final isAfter = element.updatedTime!.isAfter(item.updatedTime);
+          if (isAfter) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+      }
+    }
+    return true;
   }
 
   Future<void> getRequestsFlow() async {
@@ -142,6 +196,7 @@ class OfflineCubit extends Cubit<OfflineState> {
         OfflineState.initial(
           waitingList: result.$1,
           successList: result.$2,
+          notSentList: result.$3,
         ),
       );
     } catch (_) {
@@ -160,18 +215,25 @@ class OfflineCubit extends Cubit<OfflineState> {
     emit(OfflineState.initial(waitingList: result.$1, successList: result.$2));
   }
 
-  (List<OfflineRequestEntity>, List<OfflineRequestEntity>) arrangeList(
+  (
+    List<OfflineRequestEntity>,
+    List<OfflineRequestEntity>,
+    List<OfflineRequestEntity>,
+  ) arrangeList(
     List<OfflineRequestEntity> data,
   ) {
     final waiting = <OfflineRequestEntity>[];
     final success = <OfflineRequestEntity>[];
+    final notSent = <OfflineRequestEntity>[];
     for (final item in data) {
       if (item.status == OfflineRequestStatus.success) {
         success.add(item);
+      } else if (item.status == OfflineRequestStatus.notSent) {
+        notSent.add(item);
       } else {
         waiting.add(item);
       }
     }
-    return (waiting, success);
+    return (waiting, success, notSent);
   }
 }

@@ -21,7 +21,7 @@ class OfflineRequestsView extends StatelessWidget {
         ),
         persistentFooterButtons: const [OfflineRequestFooterButtons()],
         body: const DefaultTabController(
-          length: 2,
+          length: 3,
           child: Column(
             children: [
               OfflineRequestTabs(),

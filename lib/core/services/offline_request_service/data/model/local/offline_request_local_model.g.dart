@@ -214,11 +214,13 @@ const _OfflineRequestLocalModelmethodValueEnumMap = {
 };
 const _OfflineRequestLocalModelrequestStatusEnumValueMap = {
   'waiting': 0,
-  'success': 1,
+  'notSent': 1,
+  'success': 2,
 };
 const _OfflineRequestLocalModelrequestStatusValueEnumMap = {
   0: OfflineRequestStatus.waiting,
-  1: OfflineRequestStatus.success,
+  1: OfflineRequestStatus.notSent,
+  2: OfflineRequestStatus.success,
 };
 
 Id _offlineRequestLocalModelGetId(OfflineRequestLocalModel object) {

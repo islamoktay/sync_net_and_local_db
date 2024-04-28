@@ -47,7 +47,7 @@ class OfflineRequestService implements IOfflineRequestService {
 
         if (item.id != null) {
           item.requestStatus = OfflineRequestStatus.success;
-          await _localDBService.updateData<OfflineRequestLocalModel>(item);
+          await updateRequest(item.toEntity);
         }
       }
     } catch (_) {
@@ -73,6 +73,17 @@ class OfflineRequestService implements IOfflineRequestService {
   Future<void> removeRequest(int id) async {
     try {
       await _localDBService.removeData<OfflineRequestLocalModel>(id);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateRequest(OfflineRequestEntity entity) async {
+    try {
+      await _localDBService.updateData<OfflineRequestLocalModel>(
+        OfflineRequestLocalModel().fromEntity(entity),
+      );
     } catch (_) {
       rethrow;
     }

@@ -14,7 +14,8 @@ class SendRequestsButton extends StatelessWidget {
     return BlocBuilder<OfflineCubit, OfflineState>(
       builder: (context, state) {
         return ElevatedButton(
-          onPressed: () => context.read<OfflineCubit>().sendRequest(),
+          onPressed: () =>
+              context.read<OfflineCubit>().sendRequest(isTriggeredByHand: true),
           child: const Text('Send Requests'),
         );
       },

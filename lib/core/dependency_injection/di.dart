@@ -25,6 +25,7 @@ import 'package:sync_net_and_local_db/core/services/offline_request_service/doma
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_get_requests_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_save_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_send_request_usecase.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_update_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_watch_db_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/data/model/local/user_local_model.dart';
 import 'package:sync_net_and_local_db/feature/common/data/repo/common_local_repo.dart';
@@ -100,6 +101,8 @@ Future<void> setupLocator() async {
         OfflineSendRequestUsecase(sl()),
         WatchNetworkUsecase(sl()),
         OfflineDeleteRequestUsecase(sl()),
+        GetUsersFromNetworkUsecase(sl()),
+        OfflineUpdateRequestUsecase(sl()),
         GetUsersFlowUsecase(
           CheckNetworkUsecase(sl()),
           GetUsersFromNetworkUsecase(sl()),

@@ -18,38 +18,47 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OfflineState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,6 +70,7 @@ mixin _$OfflineState {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +81,7 @@ mixin _$OfflineState {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +92,7 @@ mixin _$OfflineState {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +124,8 @@ abstract class _$$InitialImplCopyWith<$Res> {
   @useResult
   $Res call(
       {List<OfflineRequestEntity> waitingList,
-      List<OfflineRequestEntity> successList});
+      List<OfflineRequestEntity> successList,
+      List<OfflineRequestEntity> notSentList});
 }
 
 /// @nodoc
@@ -128,6 +141,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? waitingList = null,
     Object? successList = null,
+    Object? notSentList = null,
   }) {
     return _then(_$InitialImpl(
       waitingList: null == waitingList
@@ -137,6 +151,10 @@ class __$$InitialImplCopyWithImpl<$Res>
       successList: null == successList
           ? _value._successList
           : successList // ignore: cast_nullable_to_non_nullable
+              as List<OfflineRequestEntity>,
+      notSentList: null == notSentList
+          ? _value._notSentList
+          : notSentList // ignore: cast_nullable_to_non_nullable
               as List<OfflineRequestEntity>,
     ));
   }
@@ -149,9 +167,12 @@ class _$InitialImpl implements _Initial {
       {final List<OfflineRequestEntity> waitingList =
           const <OfflineRequestEntity>[],
       final List<OfflineRequestEntity> successList =
+          const <OfflineRequestEntity>[],
+      final List<OfflineRequestEntity> notSentList =
           const <OfflineRequestEntity>[]})
       : _waitingList = waitingList,
-        _successList = successList;
+        _successList = successList,
+        _notSentList = notSentList;
 
   final List<OfflineRequestEntity> _waitingList;
   @override
@@ -171,9 +192,18 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_successList);
   }
 
+  final List<OfflineRequestEntity> _notSentList;
+  @override
+  @JsonKey()
+  List<OfflineRequestEntity> get notSentList {
+    if (_notSentList is EqualUnmodifiableListView) return _notSentList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_notSentList);
+  }
+
   @override
   String toString() {
-    return 'OfflineState.initial(waitingList: $waitingList, successList: $successList)';
+    return 'OfflineState.initial(waitingList: $waitingList, successList: $successList, notSentList: $notSentList)';
   }
 
   @override
@@ -184,14 +214,17 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality()
                 .equals(other._waitingList, _waitingList) &&
             const DeepCollectionEquality()
-                .equals(other._successList, _successList));
+                .equals(other._successList, _successList) &&
+            const DeepCollectionEquality()
+                .equals(other._notSentList, _notSentList));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_waitingList),
-      const DeepCollectionEquality().hash(_successList));
+      const DeepCollectionEquality().hash(_successList),
+      const DeepCollectionEquality().hash(_notSentList));
 
   @JsonKey(ignore: true)
   @override
@@ -202,48 +235,57 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) {
-    return initial(waitingList, successList);
+    return initial(waitingList, successList, notSentList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) {
-    return initial?.call(waitingList, successList);
+    return initial?.call(waitingList, successList, notSentList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(waitingList, successList);
+      return initial(waitingList, successList, notSentList);
     }
     return orElse();
   }
@@ -257,6 +299,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) {
     return initial(this);
   }
@@ -270,6 +313,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) {
     return initial?.call(this);
   }
@@ -283,6 +327,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -295,10 +340,12 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements OfflineState {
   const factory _Initial(
       {final List<OfflineRequestEntity> waitingList,
-      final List<OfflineRequestEntity> successList}) = _$InitialImpl;
+      final List<OfflineRequestEntity> successList,
+      final List<OfflineRequestEntity> notSentList}) = _$InitialImpl;
 
   List<OfflineRequestEntity> get waitingList;
   List<OfflineRequestEntity> get successList;
+  List<OfflineRequestEntity> get notSentList;
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -342,14 +389,17 @@ class _$noNetworkImpl implements _noNetwork {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) {
     return noNetwork();
   }
@@ -357,14 +407,17 @@ class _$noNetworkImpl implements _noNetwork {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) {
     return noNetwork?.call();
   }
@@ -372,14 +425,17 @@ class _$noNetworkImpl implements _noNetwork {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) {
     if (noNetwork != null) {
@@ -397,6 +453,7 @@ class _$noNetworkImpl implements _noNetwork {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) {
     return noNetwork(this);
   }
@@ -410,6 +467,7 @@ class _$noNetworkImpl implements _noNetwork {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) {
     return noNetwork?.call(this);
   }
@@ -423,6 +481,7 @@ class _$noNetworkImpl implements _noNetwork {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) {
     if (noNetwork != null) {
@@ -474,14 +533,17 @@ class _$emptyListImpl implements _emptyList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) {
     return emptyList();
   }
@@ -489,14 +551,17 @@ class _$emptyListImpl implements _emptyList {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) {
     return emptyList?.call();
   }
@@ -504,14 +569,17 @@ class _$emptyListImpl implements _emptyList {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) {
     if (emptyList != null) {
@@ -529,6 +597,7 @@ class _$emptyListImpl implements _emptyList {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) {
     return emptyList(this);
   }
@@ -542,6 +611,7 @@ class _$emptyListImpl implements _emptyList {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) {
     return emptyList?.call(this);
   }
@@ -555,6 +625,7 @@ class _$emptyListImpl implements _emptyList {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) {
     if (emptyList != null) {
@@ -606,14 +677,17 @@ class _$loadingImpl implements _loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) {
     return loading();
   }
@@ -621,14 +695,17 @@ class _$loadingImpl implements _loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) {
     return loading?.call();
   }
@@ -636,14 +713,17 @@ class _$loadingImpl implements _loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -661,6 +741,7 @@ class _$loadingImpl implements _loading {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) {
     return loading(this);
   }
@@ -674,6 +755,7 @@ class _$loadingImpl implements _loading {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) {
     return loading?.call(this);
   }
@@ -687,6 +769,7 @@ class _$loadingImpl implements _loading {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -738,14 +821,17 @@ class _$errorImpl implements _error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) {
     return error();
   }
@@ -753,14 +839,17 @@ class _$errorImpl implements _error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) {
     return error?.call();
   }
@@ -768,14 +857,17 @@ class _$errorImpl implements _error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -793,6 +885,7 @@ class _$errorImpl implements _error {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) {
     return error(this);
   }
@@ -806,6 +899,7 @@ class _$errorImpl implements _error {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) {
     return error?.call(this);
   }
@@ -819,6 +913,7 @@ class _$errorImpl implements _error {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -870,14 +965,17 @@ class _$successImpl implements _success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
         initial,
     required TResult Function() noNetwork,
     required TResult Function() emptyList,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function() success,
+    required TResult Function(String items) someNotSent,
   }) {
     return success();
   }
@@ -885,14 +983,17 @@ class _$successImpl implements _success {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult? Function()? noNetwork,
     TResult? Function()? emptyList,
     TResult? Function()? loading,
     TResult? Function()? error,
     TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
   }) {
     return success?.call();
   }
@@ -900,14 +1001,17 @@ class _$successImpl implements _success {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<OfflineRequestEntity> waitingList,
-            List<OfflineRequestEntity> successList)?
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
         initial,
     TResult Function()? noNetwork,
     TResult Function()? emptyList,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function()? success,
+    TResult Function(String items)? someNotSent,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -925,6 +1029,7 @@ class _$successImpl implements _success {
     required TResult Function(_loading value) loading,
     required TResult Function(_error value) error,
     required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
   }) {
     return success(this);
   }
@@ -938,6 +1043,7 @@ class _$successImpl implements _success {
     TResult? Function(_loading value)? loading,
     TResult? Function(_error value)? error,
     TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
   }) {
     return success?.call(this);
   }
@@ -951,6 +1057,7 @@ class _$successImpl implements _success {
     TResult Function(_loading value)? loading,
     TResult Function(_error value)? error,
     TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -962,4 +1069,179 @@ class _$successImpl implements _success {
 
 abstract class _success implements OfflineState {
   const factory _success() = _$successImpl;
+}
+
+/// @nodoc
+abstract class _$$someNotSentImplCopyWith<$Res> {
+  factory _$$someNotSentImplCopyWith(
+          _$someNotSentImpl value, $Res Function(_$someNotSentImpl) then) =
+      __$$someNotSentImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String items});
+}
+
+/// @nodoc
+class __$$someNotSentImplCopyWithImpl<$Res>
+    extends _$OfflineStateCopyWithImpl<$Res, _$someNotSentImpl>
+    implements _$$someNotSentImplCopyWith<$Res> {
+  __$$someNotSentImplCopyWithImpl(
+      _$someNotSentImpl _value, $Res Function(_$someNotSentImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? items = null,
+  }) {
+    return _then(_$someNotSentImpl(
+      null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$someNotSentImpl implements _someNotSent {
+  const _$someNotSentImpl(this.items);
+
+  @override
+  final String items;
+
+  @override
+  String toString() {
+    return 'OfflineState.someNotSent(items: $items)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$someNotSentImpl &&
+            (identical(other.items, items) || other.items == items));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, items);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$someNotSentImplCopyWith<_$someNotSentImpl> get copyWith =>
+      __$$someNotSentImplCopyWithImpl<_$someNotSentImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)
+        initial,
+    required TResult Function() noNetwork,
+    required TResult Function() emptyList,
+    required TResult Function() loading,
+    required TResult Function() error,
+    required TResult Function() success,
+    required TResult Function(String items) someNotSent,
+  }) {
+    return someNotSent(items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
+        initial,
+    TResult? Function()? noNetwork,
+    TResult? Function()? emptyList,
+    TResult? Function()? loading,
+    TResult? Function()? error,
+    TResult? Function()? success,
+    TResult? Function(String items)? someNotSent,
+  }) {
+    return someNotSent?.call(items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            List<OfflineRequestEntity> waitingList,
+            List<OfflineRequestEntity> successList,
+            List<OfflineRequestEntity> notSentList)?
+        initial,
+    TResult Function()? noNetwork,
+    TResult Function()? emptyList,
+    TResult Function()? loading,
+    TResult Function()? error,
+    TResult Function()? success,
+    TResult Function(String items)? someNotSent,
+    required TResult orElse(),
+  }) {
+    if (someNotSent != null) {
+      return someNotSent(items);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_noNetwork value) noNetwork,
+    required TResult Function(_emptyList value) emptyList,
+    required TResult Function(_loading value) loading,
+    required TResult Function(_error value) error,
+    required TResult Function(_success value) success,
+    required TResult Function(_someNotSent value) someNotSent,
+  }) {
+    return someNotSent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_noNetwork value)? noNetwork,
+    TResult? Function(_emptyList value)? emptyList,
+    TResult? Function(_loading value)? loading,
+    TResult? Function(_error value)? error,
+    TResult? Function(_success value)? success,
+    TResult? Function(_someNotSent value)? someNotSent,
+  }) {
+    return someNotSent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_noNetwork value)? noNetwork,
+    TResult Function(_emptyList value)? emptyList,
+    TResult Function(_loading value)? loading,
+    TResult Function(_error value)? error,
+    TResult Function(_success value)? success,
+    TResult Function(_someNotSent value)? someNotSent,
+    required TResult orElse(),
+  }) {
+    if (someNotSent != null) {
+      return someNotSent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _someNotSent implements OfflineState {
+  const factory _someNotSent(final String items) = _$someNotSentImpl;
+
+  String get items;
+  @JsonKey(ignore: true)
+  _$$someNotSentImplCopyWith<_$someNotSentImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -15,6 +15,9 @@ class OfflineRequestTabs extends StatelessWidget {
         Tab(
           icon: Icon(Icons.done),
         ),
+        Tab(
+          icon: Icon(Icons.sync_problem),
+        ),
       ],
     );
   }
