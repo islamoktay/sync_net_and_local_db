@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -243,5 +245,12 @@ class OfflineCubit extends Cubit<OfflineState> {
       }
     }
     return (waiting, success, notSent);
+  }
+
+  @override
+  Future<void> close() {
+    // TODO: implement close
+    log('CLOSEEEE');
+    return super.close();
   }
 }

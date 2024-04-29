@@ -1,9 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
-import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
@@ -18,6 +19,8 @@ import 'package:sync_net_and_local_db/core/services/network_status_service/data/
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/repo/i_network_status_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/usecase/check_network_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/usecase/watch_network_usecase.dart';
+import 'package:sync_net_and_local_db/core/services/notification_service/i_notification_service.dart';
+import 'package:sync_net_and_local_db/core/services/notification_service/notification_service.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/data/model/local/offline_request_local_model.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/data/repo/offline_request_service.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/repo/i_offline_request_service.dart';
@@ -55,6 +58,10 @@ Future<void> setupLocator() async {
     ..registerLazySingleton<Dio>(Dio.new)
     ..registerLazySingleton<Connectivity>(Connectivity.new)
     ..registerLazySingleton<FlutterSecureStorage>(FlutterSecureStorage.new)
+    ..registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance)
+    ..registerLazySingleton<FlutterLocalNotificationsPlugin>(
+      FlutterLocalNotificationsPlugin.new,
+    )
     ..registerSingletonAsync<Isar>(() async => _isarInit())
 
     // services
@@ -70,9 +77,10 @@ Future<void> setupLocator() async {
     ..registerLazySingleton<IOfflineRequestService>(
       () => OfflineRequestService(sl(), sl()),
     )
-    ..registerLazySingleton<Logger>(
-      () => Logger(printer: PrettyPrinter(methodCount: 0)),
+    ..registerLazySingleton<INotificationService>(
+      () => NotificationService(sl(), sl()),
     )
+
     // usecases
     ..registerLazySingleton<OfflineSaveRequestUsecase>(
       () => OfflineSaveRequestUsecase(sl()),
