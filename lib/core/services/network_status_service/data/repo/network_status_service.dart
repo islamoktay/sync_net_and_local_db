@@ -10,10 +10,10 @@ class NetworkStatusService implements INetworkStatusService {
   void watchNetwork(void Function(bool) callback) {
     try {
       _connectivity.onConnectivityChanged.listen((connectivityResult) {
-        if (connectivityResult.contains(ConnectivityResult.mobile) ||
-            connectivityResult.contains(ConnectivityResult.wifi)) {
+        if (connectivityResult == ConnectivityResult.mobile ||
+            connectivityResult == ConnectivityResult.wifi) {
           callback.call(true);
-        } else if (connectivityResult.contains(ConnectivityResult.none)) {
+        } else if (connectivityResult == ConnectivityResult.none) {
           callback.call(false);
         } else {
           callback.call(false);
@@ -28,10 +28,10 @@ class NetworkStatusService implements INetworkStatusService {
   Future<bool> checkNetwork() async {
     try {
       final connectivityResult = await _connectivity.checkConnectivity();
-      if (connectivityResult.contains(ConnectivityResult.mobile) ||
-          connectivityResult.contains(ConnectivityResult.wifi)) {
+      if (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi) {
         return true;
-      } else if (connectivityResult.contains(ConnectivityResult.none)) {
+      } else if (connectivityResult == ConnectivityResult.none) {
         return false;
       } else {
         return false;

@@ -40,7 +40,7 @@ class NotificationService implements INotificationService {
 
   Future<NotificationSettings> requestNotificationPermission(
     FirebaseMessaging messaging,
-  ) {
+  ) async {
     return messaging.requestPermission();
   }
 
@@ -58,10 +58,14 @@ class NotificationService implements INotificationService {
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(channel!);
+      await localNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()!
+          .requestExactAlarmsPermission();
     }
 
     const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/app_icon');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const initializationSettingsIOS = DarwinInitializationSettings();
 
@@ -73,7 +77,7 @@ class NotificationService implements INotificationService {
     await localNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (details) {
-        // buraya gelen mesajları handle edecek aksiyonlar yazılır
+        // here we can add actions for the messages
       },
     );
     await messaging.setForegroundNotificationPresentationOptions(
@@ -85,22 +89,26 @@ class NotificationService implements INotificationService {
 
   @override
   Future<void> showFlutterNotification(RemoteMessage message) async {
-    final android = message.notification?.android;
-    final notification = message.notification;
-    if (notification != null && android != null && channel != null) {
-      await localNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel!.id,
-            channel!.name,
-            channelDescription: channel!.description,
-            icon: android.smallIcon,
+    try {
+      final android = message.notification?.android;
+      final notification = message.notification;
+      if (notification != null && android != null && channel != null) {
+        await localNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel!.id,
+              channel!.name,
+              channelDescription: channel!.description,
+              icon: android.smallIcon,
+            ),
           ),
-        ),
-      );
+        );
+      }
+    } catch (e) {
+      return;
     }
   }
 
@@ -113,29 +121,53 @@ class NotificationService implements INotificationService {
     }
   }
 
+  @override
   Future<void> repeatNotification({
     required String title,
     required String body,
   }) async {
-    const androidNotificationDetails = AndroidNotificationDetails(
-      'repeating channel id',
-      'repeating channel name',
-      channelDescription: 'repeating description',
-    );
-    const notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
-    await localNotificationsPlugin.periodicallyShow(
-      id++,
-      title,
-      body,
-      RepeatInterval.everyMinute,
-      notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
+    try {
+      final list = await localNotificationsPlugin.pendingNotificationRequests();
+      if (list.isEmpty) {
+        const androidNotificationDetails = AndroidNotificationDetails(
+          'high_importance_channel', // id
+          'High Importance Notifications', // title
+          channelDescription:
+              'This channel is used for important notifications.',
+          priority: Priority.max,
+        );
+
+        const notificationDetails =
+            NotificationDetails(android: androidNotificationDetails);
+
+        await localNotificationsPlugin.periodicallyShow(
+          123,
+          title,
+          body,
+          RepeatInterval.everyMinute,
+          notificationDetails,
+          androidScheduleMode: AndroidScheduleMode.inexact,
+        );
+      }
+    } catch (e) {
+      return;
+    }
+  }
+
+  @override
+  Future<void> cancelNotifications() async {
+    try {
+      final pendings =
+          await localNotificationsPlugin.pendingNotificationRequests();
+
+      if (pendings.isNotEmpty) await localNotificationsPlugin.cancel(123);
+    } catch (e) {
+      return;
+    }
   }
 
   Future<void> _handleMessage(RemoteMessage message) async {
-    // buraya gelen mesajları handle edecek aksiyonlar yazılır
+    // here we can add actions for the messages
   }
 }
 

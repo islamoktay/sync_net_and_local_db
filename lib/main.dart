@@ -26,6 +26,5 @@ Future<void> main() async {
   // notification init methods
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await notificationInitMethods();
-
   runApp(const SyncNetLocalDb());
 }

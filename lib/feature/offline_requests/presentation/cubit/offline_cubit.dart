@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -8,6 +6,7 @@ import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/services/local_storage_service/i_local_storage_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/usecase/check_network_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/usecase/watch_network_usecase.dart';
+import 'package:sync_net_and_local_db/core/services/notification_service/i_notification_service.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/enum/offline_request_status.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/offline_request_entity.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_delete_request_usecase.dart';
@@ -31,6 +30,7 @@ class OfflineCubit extends Cubit<OfflineState> {
     this._offlineDeleteRequestUsecase,
     this._getUsersFromNetworkUsecase,
     this._offlineUpdateRequestUsecase,
+    this._notificationService,
     this._getUsersFlowUsecase,
   ) : super(const OfflineState.initial()) {
     getRequestsFlow().whenComplete(
@@ -54,7 +54,7 @@ class OfflineCubit extends Cubit<OfflineState> {
   final GetUsersFlowUsecase _getUsersFlowUsecase;
   final OfflineUpdateRequestUsecase _offlineUpdateRequestUsecase;
   final GetUsersFromNetworkUsecase _getUsersFromNetworkUsecase;
-
+  final INotificationService _notificationService;
   Future<void> removeWaitingList() async {
     try {
       final waiting = state.maybeMap(
@@ -174,7 +174,9 @@ class OfflineCubit extends Cubit<OfflineState> {
   }
 
   Future<void> _failOnRequests(
-      List<String> notSentActions, OfflineRequestEntity item) async {
+    List<String> notSentActions,
+    OfflineRequestEntity item,
+  ) async {
     if (!notSentActions.contains(item.moduleName)) {
       notSentActions.add(item.moduleName ?? 'Not known module');
     }
@@ -227,6 +229,15 @@ class OfflineCubit extends Cubit<OfflineState> {
   void initWatcherLocalDB() => _offlineWatchDBUsecase(
         (data) {
           if (!isClosed) emitLocalData(data);
+          if (data.isEmpty) {
+            _notificationService.cancelNotifications();
+          } else {
+            _notificationService.repeatNotification(
+              title: 'Waiting Requests',
+              body: 'There are waiting requests in your app. '
+                  'Please look for a stable network and send them away',
+            );
+          }
         },
       );
 
@@ -255,12 +266,5 @@ class OfflineCubit extends Cubit<OfflineState> {
       }
     }
     return (waiting, success, notSent);
-  }
-
-  @override
-  Future<void> close() {
-    // TODO: implement close
-    log('CLOSEEEE');
-    return super.close();
   }
 }

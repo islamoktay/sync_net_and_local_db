@@ -111,6 +111,7 @@ Future<void> setupLocator() async {
         OfflineDeleteRequestUsecase(sl()),
         GetUsersFromNetworkUsecase(sl()),
         OfflineUpdateRequestUsecase(sl()),
+        sl<INotificationService>(),
         GetUsersFlowUsecase(
           CheckNetworkUsecase(sl()),
           GetUsersFromNetworkUsecase(sl()),
