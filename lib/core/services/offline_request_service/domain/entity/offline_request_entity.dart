@@ -1,5 +1,5 @@
 import 'package:sync_net_and_local_db/core/enums/request_methods.dart';
-import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/enum/offline_request_status.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/enum/offline_request_status.dart';
 
 class OfflineRequestEntity {
   OfflineRequestEntity({

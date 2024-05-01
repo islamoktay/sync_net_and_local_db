@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:sync_net_and_local_db/core/exception/offline_save_exception.dart';
 import 'package:sync_net_and_local_db/core/services/local_db_service/i_local_db_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_service/i_network_service.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/data/model/local/offline_request_local_model.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/enum/offline_request_status.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/offline_request_entity.dart';
-import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/enum/offline_request_status.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/repo/i_offline_request_service.dart';
 
 class OfflineRequestService implements IOfflineRequestService {
@@ -34,8 +35,8 @@ class OfflineRequestService implements IOfflineRequestService {
 
   @override
   Future<void> sendRequest(OfflineRequestEntity entity) async {
+    final item = OfflineRequestLocalModel().fromEntity(entity);
     try {
-      final item = OfflineRequestLocalModel().fromEntity(entity);
       if (item.url?.isNotEmpty ?? false) {
         await _networkService.networkRequest(
           item.url!,
@@ -50,7 +51,13 @@ class OfflineRequestService implements IOfflineRequestService {
           await updateRequest(item.toEntity);
         }
       }
+    } on OfflineSaveException catch (_) {
+      rethrow;
     } catch (_) {
+      if (item.id != null) {
+        item.requestStatus = OfflineRequestStatus.notSent;
+        await updateRequest(item.toEntity);
+      }
       rethrow;
     }
   }

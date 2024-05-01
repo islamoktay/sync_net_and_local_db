@@ -8,8 +8,8 @@ import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/services/local_storage_service/i_local_storage_service.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/usecase/check_network_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/network_status_service/domain/usecase/watch_network_usecase.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/enum/offline_request_status.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/offline_request_entity.dart';
-import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/enum/offline_request_status.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_delete_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_get_requests_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_send_request_usecase.dart';
@@ -138,15 +138,16 @@ class OfflineCubit extends Cubit<OfflineState> {
             final shouldSend = await controlReq(item);
             if (shouldSend) {
               if (!sentIDs.contains(item.localId)) {
-                await _offlineSendRequestUsecase(item);
-                sentIDs.add(item.localId ?? 0);
+                try {
+                  await _offlineSendRequestUsecase(item);
+                  sentIDs.add(item.localId ?? 0);
+                } catch (_) {
+                  await _failOnRequests(notSentActions, item);
+                  continue;
+                }
               }
             } else {
-              if (!notSentActions.contains(item.moduleName)) {
-                notSentActions.add(item.moduleName ?? 'Not known module');
-              }
-              item.status = OfflineRequestStatus.notSent;
-              await _offlineUpdateRequestUsecase(item);
+              await _failOnRequests(notSentActions, item);
             }
           }
           if (notSentActions.isEmpty) {
@@ -170,6 +171,15 @@ class OfflineCubit extends Cubit<OfflineState> {
     } finally {
       await getRequestsFromLocal(sentIDs: sentIDs);
     }
+  }
+
+  Future<void> _failOnRequests(
+      List<String> notSentActions, OfflineRequestEntity item) async {
+    if (!notSentActions.contains(item.moduleName)) {
+      notSentActions.add(item.moduleName ?? 'Not known module');
+    }
+    item.status = OfflineRequestStatus.notSent;
+    await _offlineUpdateRequestUsecase(item);
   }
 
   Future<bool> controlReq(OfflineRequestEntity item) async {
