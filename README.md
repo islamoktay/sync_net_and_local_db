@@ -45,12 +45,12 @@ When there are saved requests and if they are not sent, the app will send remind
 
 ## 2. Environment
 
-[✓] Flutter (Channel stable, 3.19.2, on macOS 14.4.1 23E224 darwin-arm64, locale en-TR)
-[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
-[✓] Xcode - develop for iOS and macOS (Xcode 15.3)
-[✓] Chrome - develop for the web
-[✓] Android Studio (version 2023.1)
-[✓] VS Code (version 1.87.2)
+- Flutter (Channel stable, 3.19.2, on macOS 14.4.1 23E224 darwin-arm64, locale en-TR)
+- Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+- Xcode - develop for iOS and macOS (Xcode 15.3)
+- Chrome - develop for the web
+- Android Studio (version 2023.1)
+- VS Code (version 1.87.2)
 
 ## 3. How to run project
 
@@ -93,7 +93,7 @@ This structure promotes separation of concerns and allows you to develop the app
 
 Here's a basic project structure outline that combines Clean Architecture and Domain-Driven Design (DDD) principles approaches:
 
-    ttsterminal-mobil/
+    sync-net-and-local-db/
       └── lib/
            ├── core/
            │     ├── constant/
@@ -133,8 +133,8 @@ Here's a basic project structure outline that combines Clean Architecture and Do
   - **feature**: It contains modules of the project.
     - **core**: It contains feature related files and files that must not get into other folders.
     - **data**: It contains data sources, repositories implementations, and data models for data persistence.
-    - **domain**: It contains domain entities, repositories, and value objects as per DDD principles.
-    - **presentation**: It contains user interface components, including pages and widgets.
+    - **domain**: It contains domain entities, repositories, usecases and value objects as per DDD principles.
+    - **presentation**: It contains user interface components, including pages, widgets and state classes.
 
 ## 6. Bloc + Freezed usage
 
