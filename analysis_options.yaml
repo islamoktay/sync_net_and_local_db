@@ -4,9 +4,10 @@ analyzer:
   exclude:
     - '**.g.dart'
     - 'lib/core/constant/l10n/gen/**'
-
+    - 'lib/firebase_options.dart'
 linter:
   rules:
     public_member_api_docs: false
     one_member_abstracts: false
     directives_ordering: false
+    avoid_positional_boolean_parameters: false
