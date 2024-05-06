@@ -64,16 +64,4 @@ class LocalDBService implements ILocalDBService {
       rethrow;
     }
   }
-
-  @override
-  Future<void> updateData<E>(E item) async {
-    try {
-      await _isar.writeTxn(() async {
-        final collection = _isar.collection<E>();
-        await collection.put(item);
-      });
-    } catch (_) {
-      rethrow;
-    }
-  }
 }

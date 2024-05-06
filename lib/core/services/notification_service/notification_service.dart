@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'package:sync_net_and_local_db/core/constant/app_constants.dart';
 import 'package:sync_net_and_local_db/core/dependency_injection/di.dart';
 import 'package:sync_net_and_local_db/core/services/notification_service/i_notification_service.dart';
 
@@ -14,7 +15,7 @@ class NotificationService implements INotificationService {
 
   AndroidNotificationChannel? channel;
   NotificationSettings? settings;
-  int id = 1;
+  
   @override
   Future<void> initNotificationService() async {
     await messaging.setAutoInitEnabled(true);
@@ -128,6 +129,7 @@ class NotificationService implements INotificationService {
   }) async {
     try {
       final list = await localNotificationsPlugin.pendingNotificationRequests();
+
       if (list.isEmpty) {
         const androidNotificationDetails = AndroidNotificationDetails(
           'high_importance_channel', // id
@@ -141,7 +143,7 @@ class NotificationService implements INotificationService {
             NotificationDetails(android: androidNotificationDetails);
 
         await localNotificationsPlugin.periodicallyShow(
-          123,
+          AppConstants.repeatID,
           title,
           body,
           RepeatInterval.everyMinute,
@@ -157,10 +159,7 @@ class NotificationService implements INotificationService {
   @override
   Future<void> cancelNotifications() async {
     try {
-      final pendings =
-          await localNotificationsPlugin.pendingNotificationRequests();
-
-      if (pendings.isNotEmpty) await localNotificationsPlugin.cancel(123);
+      await localNotificationsPlugin.cancel(AppConstants.repeatID);
     } catch (e) {
       return;
     }

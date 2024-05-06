@@ -25,7 +25,7 @@
     - [b. OfflineGetRequestUsecase](#b-offlinegetrequestusecase)
     - [c. OfflineSaveRequestUsecase](#c-offlinesaverequestusecase)
     - [d. OfflineDeleteRequestUsecase](#d-offlinedeleterequestusecase)
-    - [e. OfflineUpdateteRequestUsecase](#e-offlineupdateterequestusecase)
+    - [e. OfflineUpdateRequestUsecase](#e-offlineupdaterequestusecase)
     - [f. OfflineWatchDBUsecase](#f-offlinewatchdbusecase)
 
 
@@ -273,9 +273,8 @@ It has a control mechanism for duplication. If item is already in the local DB i
 ### d. OfflineDeleteRequestUsecase
 This usecase is for deleting requests. It gets id and removes the item.
 
-### e. OfflineUpdateteRequestUsecase
+### e. OfflineUpdateRequestUsecase
 This usecase is for updating requests. It gets **OfflineRequestEntity** and updates the item.
 
 ### f. OfflineWatchDBUsecase
-
 This usecase is for listening local DB for saved requests. It gets a callback function and in that function it returns the saved requests in DB. It is useful for updating UI.

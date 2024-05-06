@@ -12,7 +12,6 @@ import 'package:sync_net_and_local_db/core/services/offline_request_service/doma
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_delete_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_get_requests_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_send_request_usecase.dart';
-import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_update_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_watch_db_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/usecase/get_users_flow_usecase.dart';
 import 'package:sync_net_and_local_db/feature/home/domain/usecase/get_users_from_network_usecase.dart';
@@ -29,7 +28,6 @@ class OfflineCubit extends Cubit<OfflineState> {
     this._watchNetworkUsecase,
     this._offlineDeleteRequestUsecase,
     this._getUsersFromNetworkUsecase,
-    this._offlineUpdateRequestUsecase,
     this._notificationService,
     this._getUsersFlowUsecase,
   ) : super(const OfflineState.initial()) {
@@ -52,7 +50,6 @@ class OfflineCubit extends Cubit<OfflineState> {
   final WatchNetworkUsecase _watchNetworkUsecase;
   final OfflineDeleteRequestUsecase _offlineDeleteRequestUsecase;
   final GetUsersFlowUsecase _getUsersFlowUsecase;
-  final OfflineUpdateRequestUsecase _offlineUpdateRequestUsecase;
   final GetUsersFromNetworkUsecase _getUsersFromNetworkUsecase;
   final INotificationService _notificationService;
   Future<void> removeWaitingList() async {
@@ -83,10 +80,25 @@ class OfflineCubit extends Cubit<OfflineState> {
     }
   }
 
+  Future<void> removeNotSentList() async {
+    try {
+      final successList = state.maybeMap(
+        initial: (value) => value.notSentList,
+        orElse: () => <OfflineRequestEntity>[],
+      );
+      for (final element in successList) {
+        await removeRequest(element.localId ?? 0);
+      }
+    } catch (_) {
+      return;
+    }
+  }
+
   Future<void> removeAllRequests() async {
     try {
       await removeWaitingList();
       await removeSuccessList();
+      await removeNotSentList();
     } catch (_) {
       return;
     }
@@ -107,9 +119,11 @@ class OfflineCubit extends Cubit<OfflineState> {
   }
 
   Future<void> sendRequest({bool isTriggeredByHand = false}) async {
-    final sentIDs = state.maybeMap(
-      initial: (value) => value.sentLocalIDs,
-      orElse: () => <int>[],
+    final sentIDs = <int>[];
+
+    state.maybeMap(
+      initial: (value) => sentIDs.addAll(value.sentLocalIDs),
+      orElse: () {},
     );
     try {
       final waiting = state.maybeMap(
@@ -180,8 +194,6 @@ class OfflineCubit extends Cubit<OfflineState> {
     if (!notSentActions.contains(item.moduleName)) {
       notSentActions.add(item.moduleName ?? 'Not known module');
     }
-    item.status = OfflineRequestStatus.notSent;
-    await _offlineUpdateRequestUsecase(item);
   }
 
   Future<bool> controlReq(OfflineRequestEntity item) async {
@@ -232,11 +244,21 @@ class OfflineCubit extends Cubit<OfflineState> {
           if (data.isEmpty) {
             _notificationService.cancelNotifications();
           } else {
-            _notificationService.repeatNotification(
-              title: 'Waiting Requests',
-              body: 'There are waiting requests in your app. '
-                  'Please look for a stable network and send them away',
-            );
+            final list = data
+                .where(
+                  (element) => element.status == OfflineRequestStatus.waiting,
+                )
+                .toList();
+            if (list.isNotEmpty) {
+              _notificationService.repeatNotification(
+                title: 'Waiting Requests',
+                body: 'There are waiting requests in your app. '
+                    'Please look for a stable network and send them away',
+              );
+            } else if (list.isEmpty) {
+
+              _notificationService.cancelNotifications();
+            }
           }
         },
       );
