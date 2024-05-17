@@ -61,8 +61,8 @@ class NotificationService implements INotificationService {
           ?.createNotificationChannel(channel!);
       await localNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()!
-          .requestExactAlarmsPermission();
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestExactAlarmsPermission();
     }
 
     const initializationSettingsAndroid =
