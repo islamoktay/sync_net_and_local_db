@@ -117,6 +117,7 @@ Future<void> setupLocator() async {
           SaveUsersToLocalUsecase(sl()),
           GetUsersFromLocalUsecase(sl()),
         ),
+        OfflineSaveRequestUsecase(sl()),
       ),
     );
 }

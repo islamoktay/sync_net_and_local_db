@@ -11,6 +11,7 @@ import 'package:sync_net_and_local_db/core/services/offline_request_service/doma
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/entity/offline_request_entity.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_delete_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_get_requests_usecase.dart';
+import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_save_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_send_request_usecase.dart';
 import 'package:sync_net_and_local_db/core/services/offline_request_service/domain/usecase/offline_watch_db_usecase.dart';
 import 'package:sync_net_and_local_db/feature/common/domain/usecase/get_users_flow_usecase.dart';
@@ -30,6 +31,7 @@ class OfflineCubit extends Cubit<OfflineState> {
     this._getUsersFromNetworkUsecase,
     this._notificationService,
     this._getUsersFlowUsecase,
+    this._offlineSaveRequestUsecase,
   ) : super(const OfflineState.initial()) {
     getRequestsFlow().whenComplete(
       () => sl<ILocalStorageService>()
@@ -46,6 +48,7 @@ class OfflineCubit extends Cubit<OfflineState> {
   final OfflineGetRequestUsecase _offlineGetRequestUsecase;
   final OfflineWatchDBUsecase _offlineWatchDBUsecase;
   final OfflineSendRequestUsecase _offlineSendRequestUsecase;
+  final OfflineSaveRequestUsecase _offlineSaveRequestUsecase;
   final CheckNetworkUsecase _checkNetworkUsecase;
   final WatchNetworkUsecase _watchNetworkUsecase;
   final OfflineDeleteRequestUsecase _offlineDeleteRequestUsecase;
@@ -161,6 +164,9 @@ class OfflineCubit extends Cubit<OfflineState> {
                 }
               }
             } else {
+              item.status = OfflineRequestStatus.notSent;
+              await _offlineDeleteRequestUsecase(item.localId ?? 0);
+              await _offlineSaveRequestUsecase(item);
               await _failOnRequests(notSentActions, item);
             }
           }
@@ -256,7 +262,6 @@ class OfflineCubit extends Cubit<OfflineState> {
                     'Please look for a stable network and send them away',
               );
             } else if (list.isEmpty) {
-
               _notificationService.cancelNotifications();
             }
           }
