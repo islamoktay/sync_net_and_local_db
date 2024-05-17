@@ -18,7 +18,6 @@
       - [initWatcher](#initwatcher)
       - [saveData](#savedata)
       - [removeCollection](#removecollection)
-      - [updateData](#updatedata)
       - [removeData](#removedata)
   - [7. Offline Request Service](#7-offline-request-service)
     - [a. OfflineSendRequestUsecase](#a-offlinesendrequestusecase)
@@ -31,6 +30,8 @@
 
 ## 1. App Description
 
+![Offline First Diagram](documentation/offline_first_diagram.png)
+
 This demo app is designed to provide fully-functioned offline capabilities for users. There is a remote DB in **Firebase Realtime DB** that holds data of the users.
 
 App will act as an offline-first app. It will always gives the user local db data. And when network is available it will get data from remote DB, and sync data for the local DB of the device.
@@ -39,7 +40,11 @@ There are CRUD operations for users. When network is available, it will send the
 
 If **Auto-Sync** is chosen, it will listen network status and if network is okay it will send the saved requests data automatically.
 
-If **by Hand** is chosen, it will send the requests by decision of the user.
+![Auto Sync Diagram](documentation/auto_sync.png)
+
+If **by Hand** is chosen, it will send the requests by decision of the user. First two status stated above in the diagram is same for 'by Hand' also.
+
+![by Hand Diagram](documentation/by_hand.png)
 
 When there are saved requests and if they are not sent, the app will send reminding notifications periodically.
 
@@ -84,12 +89,15 @@ It has been used Clean Architecture and Domain-Driven Design (DDD) principles in
 
 This structure promotes separation of concerns and allows you to develop the app in a modular and testable way. You can expand upon this structure based on your project's specific requirements and complexity. Additionally, make sure to adhere to the SOLID principles and DDD concepts as you design and implement your Flutter app to ensure maintainability and scalability. For further information please check:
 
+
 - [The Clean Architecture by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [A Guided Tour of Clean Architecture](https://www.freecodecamp.org/news/a-quick-introduction-to-clean-architecture-990c014448d2/)
 - [Domain-Driven Design Quickly PDF](https://www.infoq.com/minibooks/domain-driven-design-quickly/)
 - [Reso Coder Clean Architecture Tutorials](https://resocoder.com/flutter-clean-architecture-tdd/)
 
 ## 5. Folder Structure
+
+![Project Structure](documentation/project_structure.png)
 
 Here's a basic project structure outline that combines Clean Architecture and Domain-Driven Design (DDD) principles approaches:
 
@@ -212,12 +220,6 @@ This method saves a list of data of type E to the local database. It returns a F
 Future<void> removeCollection<E>();
 ```
 This method removes all data of type E from the local database. It returns a Future that completes when the operation is finished.
-
-#### updateData
-```dart
-Future<void> updateData<E>(E item);
-```
-This method updates data if it exists already in the local DB.
 
 #### removeData
 ```dart
