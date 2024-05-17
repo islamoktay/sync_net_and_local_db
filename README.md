@@ -11,6 +11,7 @@
   - [4. Project Structure](#4-project-structure)
   - [5. Folder Structure](#5-folder-structure)
   - [6. Bloc + Freezed usage](#6-bloc--freezed-usage)
+  - [7. Why Isar?](#7-why-isar)
   - [7. Local DB Service](#7-local-db-service)
       - [Constructor](#constructor)
       - [Methods](#methods)
@@ -183,6 +184,47 @@ class MyCubit extends Cubit<MyState> {
 ```
 
 In this example, the MyState class is defined using Freezed, and the MyCubit class uses this state class to manage its state. The loadData method in MyCubit emits different states based on the progress of the data loading operation.
+
+## 7. Why Isar?
+
+[Isar](https://pub.dev/packages/isar) is a user-friendly NoSQL database designed specifically for Flutter apps. It boasts a simple API and minimal setup, making it easy to integrate. Isar offers excellent performance and type safety, along with features like flexible queries and encryption, for robust data management in your Flutter projects.
+
+**Here's why you might choose Isar over other local database plugins for Flutter:**
+
+**Ease of Use:** Isar is known for its simple API and minimal setup. It requires no configuration and generates boilerplate code, making it a breeze to integrate into your Flutter project.
+
+**Performance:** Isar offers high performance for both read and write operations. It's optimized for mobile usage, ensuring a smooth user experience for your Flutter app.
+
+**Type Safety:** By leveraging Dart's static type system, Isar catches errors during compilation, preventing runtime issues and improving code reliability.
+
+**Rich Features:** Isar boasts a variety of features, including:
+
+**Flexible querying:** Perform complex data operations with ease.
+Automatic JSON serialization/deserialization: Simplify data exchange between your app and external sources.
+
+**Optional encryption:** Enhance data security if needed.
+
+**Full-text search:** Efficiently search through your data.
+
+**ACID Compliance:** Isar adheres to ACID (Atomicity, Consistency, Isolation, Durability) principles, guaranteeing data integrity during transactions.
+
+**Multiplatform Support:** Isar works seamlessly across iOS and Android, making it a great choice for cross-platform Flutter development.
+
+In summary, Isar is a strong contender for local data persistence in Flutter due to its user-friendliness, performance, type safety, and feature-packed design.
+
+
+**Isar vs. Other Local Database Plugins in Flutter:**
+
+| Feature         | Isar                                                        | sqflite                    | Floor/Drift                          | Realm                  | ObjectBox              | Hive                       |
+|-----------------|-------------------------------------------------------------|----------------------------|--------------------------------------|------------------------|------------------------|----------------------------|
+| Type            | NoSQL                                                       | SQL                        | ORM (over sqflite)                   | NoSQL                  | NoSQL                  | NoSQL (uses JSON)          |
+| Ease of Use     | Simple API, minimal setup                                   | Lower-level API, more code | More complex setup, but cleaner code | Simple API             | Simple API             | Very Simple API            |
+| Performance     | Excellent                                                   | Very good                  | Good                                 | Excellent              | Excellent              | Good                       |
+| Type Safety     | Strong (Dart types)                                         | No                         | Strong (through generated code)      | Optional               | Optional               | No                         |
+| Features        | Rich (flexible queries, JSON, encryption, full-text search) | Basic (SQL queries)        | Rich (built on sqflite)              | Rich (similar to Isar) | Rich (similar to Isar) | Basic (key-value storage)  |
+| ACID Compliance | Yes                                                         | Yes (through sqflite)      | Yes (through sqflite)                | Yes                    | Yes                    | No (eventually consistent) |
+
+
 
 ## 7. Local DB Service
 
