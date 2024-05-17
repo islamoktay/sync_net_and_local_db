@@ -41,6 +41,13 @@ class ClearButton extends StatelessWidget {
                   ),
                   child: const Text('Success'),
                 ),
+                ElevatedButton(
+                  onPressed: () => _action(
+                    () => sl<OfflineCubit>().removeNotSentList(),
+                    context,
+                  ),
+                  child: const Text('Not Sent'),
+                ),
               ],
             ),
           ),

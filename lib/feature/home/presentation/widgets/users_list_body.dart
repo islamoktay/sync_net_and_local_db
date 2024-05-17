@@ -23,6 +23,11 @@ class UsersListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
+        if (state.users.isEmpty) {
+          return const Center(
+            child: Text('Nothing to show here (:'),
+          );
+        }
         return BlocProvider(
           create: (context) => RemoveUserCubit(
             RemoveUserFromLocalUsecase(sl<ICommonLocalRepo>()),

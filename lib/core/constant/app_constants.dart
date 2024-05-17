@@ -5,4 +5,7 @@ class AppConstants {
 
   // Storage Constants
   static const String autoSendRequest = 'autoSendRequest';
+
+  /// Notification Constants
+  static const int repeatID = 1993;
 }

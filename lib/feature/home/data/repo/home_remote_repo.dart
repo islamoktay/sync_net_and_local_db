@@ -16,17 +16,21 @@ class HomeRemoteRepo implements IHomeRemoteRepo {
       final result = await _networkService.networkRequest(
         HomeNetworkConstants.usersJson,
         method: RequestMethods.get,
-      ) as Map<String, dynamic>;
-      final list = <User>[];
-      final values = result.values.toList();
-      for (final element in values) {
-        final index = values.indexOf(element);
-        final item = UserModel.fromJson(element as Map<String, dynamic>)
-            .toEntity(result.keys.toList()[index]);
+      );
+      if (result is Map<String, dynamic>) {
+        final list = <User>[];
+        final values = result.values.toList();
+        for (final element in values) {
+          final index = values.indexOf(element);
+          final item = UserModel.fromJson(element as Map<String, dynamic>)
+              .toEntity(result.keys.toList()[index]);
 
-        list.add(item);
+          list.add(item);
+        }
+        return list;
+      } else {
+        return [];
       }
-      return list;
     } catch (_) {
       rethrow;
     }
