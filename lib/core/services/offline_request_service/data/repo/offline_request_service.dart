@@ -45,21 +45,10 @@ class OfflineRequestService implements IOfflineRequestService {
               ? null
               : jsonDecode(item.bodyAsJson!) as Map<String, dynamic>,
         );
-
-        if (item.id != null) {
-          entity.status = OfflineRequestStatus.success;
-          await removeRequest(item.id!);
-          await saveRequest(entity);
-        }
+      } else {
+        throw Exception('No url granted');
       }
-    } on OfflineSaveException catch (_) {
-      rethrow;
     } catch (_) {
-      if (item.id != null) {
-        entity.status = OfflineRequestStatus.notSent;
-        await removeRequest(item.id!);
-        await saveRequest(entity);
-      }
       rethrow;
     }
   }

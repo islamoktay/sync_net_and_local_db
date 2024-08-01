@@ -8,6 +8,24 @@ class OfflineSendRequestUsecase implements Usecase<void, OfflineRequestEntity> {
 
   @override
   Future<void> call(OfflineRequestEntity entity) async {
-    return _service.sendRequest(entity);
+    final item = OfflineRequestLocalModel().fromEntity(entity);
+    try {
+    await _service.sendRequest(entity);
+        if (item.id != null) {
+          entity.status = OfflineRequestStatus.success;
+          await _service.removeRequest(item.id!);
+          await _service.saveRequest(entity);
+        }
+
+    }  on OfflineSaveException catch (_) {
+      rethrow;
+    } catch (_) {
+      if (item.id != null) {
+        entity.status = OfflineRequestStatus.notSent;
+        await _service.removeRequest(item.id!);
+        await _service.saveRequest(entity);
+      }
+      rethrow;
+    }
   }
 }
